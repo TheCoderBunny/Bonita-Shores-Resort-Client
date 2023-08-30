@@ -24,18 +24,25 @@
 
                 <span>
                     <button mat-raised-button>Sign in</button>
-                    &nbsp;
-                    <button mat-raised-button>Register</button>
                 </span>
 
             </form>
+            <span class="menu-form">
+                <button mat-raised-button>Register</button>
+            </span>
         </div>
 
     </mat-menu>
 </div>
 
 <ng-template #loggedOut>
-    <div>
-        {{userService.currentUser.firstName}}
-    </div>
+    <button mat-button [matMenuTriggerFor]="menu" #trigger="matMenuTrigger">{{userService.currentUser.firstName}}
+        {{userService.currentUser.lastName}}</button>
+    <mat-menu #menu="matMenu" class="menu-form-wrapper" [hasBackdrop]="false">
+        <span class="menu-form">
+            <button (click)="this.userService.logout()" mat-raised-button>Logout</button>
+            &nbsp;
+            <button mat-raised-button>My Trip</button>
+        </span>
+    </mat-menu>
 </ng-template>

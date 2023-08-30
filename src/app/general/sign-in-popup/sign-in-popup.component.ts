@@ -19,7 +19,7 @@ export class SignInPopupComponent implements OnInit {
 
  signin(){
    this.userService.login(this.email, this.password).subscribe((response:any) => {
-    window.alert('Welcome!');
+    //the person's name will automatically show.
    }, error => {
        console.log('Error: ', error);
        window.alert('Unsuccessful Login');

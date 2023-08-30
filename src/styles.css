@@ -10,6 +10,10 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.menu-form-wrapper {
+    width: 300px;
+}
+
 .menu-form-wrapper .menu-form {
     display: flex;
     flex-direction: column;

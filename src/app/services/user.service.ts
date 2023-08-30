@@ -10,14 +10,32 @@ export class UserService {
 
   baseURL: string = "http://localhost:5214";
   tokenKey: string = "BSRLoginToken";
-  currentUser: User = new User("notloggedin");
+  currentUser: User = new User();
   public loggedIn: boolean = false;
+
+  checkForUser(user: User) {
+    this.currentUser = user;
+    console.log(this.currentUser,this.currentUser.token);
+    if (!this.currentUser){
+      return;
+    }
+    if (this.currentUser.email) {
+      this.loggedIn = true;
+    }
+    if (this.currentUser.token) {
+      localStorage.setItem(this.tokenKey, this.currentUser.token);
+    }
+  }
+
+  logout() {
+    this.loggedIn=false;
+    this.currentUser = new User();
+    localStorage.removeItem(this.tokenKey);
+  }
 
   constructor(private http: HttpClient) {
     this.getMyUserByToken().subscribe(user => {
-      this.currentUser = user;
-      console.log(this.currentUser);
-      this.loggedIn=true;
+      this.checkForUser(user)
     });
   }
 
@@ -30,17 +48,18 @@ export class UserService {
     queryParams = queryParams.append('email', email);
     queryParams = queryParams.append('password', password);
 
-    return this.http.get(`${this.baseURL}/user/login`, { params: queryParams, responseType: 'text' })
+    return this.http.get<User>(`${this.baseURL}/user/login`, { params: queryParams})
       .pipe(tap((response: any) => {
-        localStorage.setItem(this.tokenKey, response);
+        localStorage.setItem(this.tokenKey, response.token);
+        this.checkForUser(response)
       }));
   }
 
   getMyUserByToken(): Observable<User> {
-    if (localStorage.getItem(this.tokenKey)==null){ return new Observable<User> }
+    if (localStorage.getItem(this.tokenKey) == null) { return new Observable<User> }
     let reqHeaders = {
       Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
     }
-    return this.http.get<User>(this.baseURL+"/user/current", { headers: reqHeaders });
+    return this.http.get<User>(this.baseURL + "/user/current", { headers: reqHeaders });
   }
 }
