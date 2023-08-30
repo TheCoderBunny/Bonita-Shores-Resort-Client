@@ -14,7 +14,7 @@
                 </mat-form-field>
 
                 <span>
-                    <button mat-raised-button>Sign in</button>
+                    <button class="topNavRight" mat-raised-button>Sign in</button>
                 </span>
 
             </form>
@@ -33,7 +33,7 @@
         <span class="menu-form">
             <button routerLink='/dashboard' mat-raised-button>My Trip</button>
             &nbsp;
-            <button (click)="this.userService.logout()" mat-raised-button>Logout</button>
+            <button (click)="this.userService.logout();" mat-raised-button>Logout</button>
         </span>
     </mat-menu>
 </ng-template>
