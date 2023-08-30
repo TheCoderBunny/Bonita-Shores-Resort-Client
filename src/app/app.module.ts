@@ -11,18 +11,28 @@ import { FormsModule } from '@angular/forms';
 import { SignInPopupComponent } from './general/sign-in-popup/sign-in-popup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { DashboardMainComponent } from './dashboard/dashboard-main/dashboard-main.component';
+import { HeaderComponent } from './general/header/header.component';
+import { ParkComponent } from './resortPages/park/park.component';
+import { HotelsComponent } from './resortPages/hotels/hotels.component';
+import { RestaurantsComponent } from './resortPages/restaurants/restaurants.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
     HomeComponent,
-    SignInPopupComponent
+    SignInPopupComponent,
+    DashboardMainComponent,
+    HeaderComponent,
+    ParkComponent,
+    HotelsComponent,
+    RestaurantsComponent
   ],
   imports: [
     BrowserModule,

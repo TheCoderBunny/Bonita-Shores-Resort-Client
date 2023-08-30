@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+    <button routerLink='/home' mat-button>Home</button>
+    <div class="topNavRight">
+        <div *ngFor="let button of buttonList">
+            <button routerLink='/{{button.toLowerCase()}}' mat-button>{{button}}</button>
+            &nbsp;
+        </div>
+        <sign-in-popup></sign-in-popup>
+    </div>
+</mat-toolbar>
