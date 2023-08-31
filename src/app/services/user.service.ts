@@ -21,6 +21,12 @@ export class UserService {
     }
   }
 
+  correctLoggedInRoute() {//if the user is logged in move them if they're in the wrong area.
+    if (this.router.url === '/register') {
+      this.router.navigateByUrl('/home');
+    }
+  }
+
   constructor(private http: HttpClient, private router: Router) {
     this.getMyUserByToken().subscribe(user => {
       this.checkForUser(user)
@@ -35,6 +41,7 @@ export class UserService {
     }
     if (this.currentUser.email) {
       this.loggedIn = true;
+      this.correctLoggedInRoute();
     } else {
       this.correctLoggedOutRoute();
     }
