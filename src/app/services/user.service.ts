@@ -29,14 +29,13 @@ export class UserService {
 
   checkForUser(user: User) {
     this.currentUser = user;
-    console.log(this.currentUser, this.currentUser.token);
     if (!this.currentUser) {
       this.correctLoggedOutRoute();
       return;
     }
     if (this.currentUser.email) {
       this.loggedIn = true;
-    }else{
+    } else {
       this.correctLoggedOutRoute();
     }
     if (this.currentUser.token) {
@@ -52,23 +51,29 @@ export class UserService {
   }
 
   signUp(newUser: User) {
-    return this.http.post(`${this.baseURL}/user/register`, newUser);
+    return this.http.post(`${this.baseURL}/user/register`, newUser).pipe(tap((response: any) => {
+      this.login(newUser.email || "", newUser.password || "").subscribe((response:any) => {
+        this.router.navigateByUrl('/home')
+       }, error => {
+           console.log('Error: ', error);
+           window.alert('Unsuccessful Login');
+       });
+    }));
   }
 
   login(email: string, password: string) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('email', email);
     queryParams = queryParams.append('password', password);
-
     return this.http.get<User>(`${this.baseURL}/user/login`, { params: queryParams })
       .pipe(tap((response: any) => {
         localStorage.setItem(this.tokenKey, response.token);
         this.checkForUser(response)
-      }));
+      }))
   }
 
   getMyUserByToken(): Observable<User> {
-    if (localStorage.getItem(this.tokenKey) == null) {this.checkForUser(new User()); return new Observable<User> }
+    if (localStorage.getItem(this.tokenKey) == null) { this.checkForUser(new User()); return new Observable<User> }
     let reqHeaders = {
       Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
     }

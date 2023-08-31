@@ -1,5 +1,5 @@
 <div *ngIf="!userService.loggedIn; else loggedOut">
-    <button mat-button [matMenuTriggerFor]="menu" #trigger="matMenuTrigger">Sign In</button>
+    <button mat-button [matMenuTriggerFor]="menu" #trigger="matMenuTrigger">Sign-In or Register</button>
     <mat-menu #menu="matMenu" class="menu-form-wrapper" [hasBackdrop]="false">
         <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
             <form class="menu-form" (ngSubmit)="signin()">
@@ -14,12 +14,12 @@
                 </mat-form-field>
 
                 <span>
-                    <button class="topNavRight" mat-raised-button>Sign in</button>
+                    <button class="topNavRight" mat-raised-button>Sign-In</button>
                 </span>
 
             </form>
             <span class="menu-form">
-                <button mat-raised-button>Register</button>
+                <button routerLink='/register' mat-raised-button>Register</button>
             </span>
         </div>
 
