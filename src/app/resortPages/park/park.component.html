@@ -1,2 +1,51 @@
 <app-header></app-header>
-<p>park works!</p>
+<div class="img-holder">
+    <img class="adImage" src={{currentImage}}>
+    <button class="rightButton" mat-fab (click)="moveImage(1)"><mat-icon
+            class="icon-arrow">keyboard_arrow_right</mat-icon></button>
+    <button class="leftButton" mat-fab (click)="moveImage(-1)"><mat-icon
+            class="icon-arrow">keyboard_arrow_left</mat-icon></button>
+</div>
+<br>
+
+<mat-grid-list cols="3" rowHeight="300px">
+    <mat-grid-tile>
+        <img class="smallAdImage"
+            src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+        <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Nec dui nunc mattis enim ut tellus.</div>
+    </mat-grid-tile>
+    <mat-grid-tile><img class="smallAdImage"
+            src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+        <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero.</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <!-- Below is an old concept, but I feel the newer one is cleaner -->
+        <!-- <mat-date-range-input [hidden]="true" [rangePicker]="picker">
+                <input matStartDate [hidden]="true" placeholder="Start date" >
+                <input matEndDate [hidden]="true" placeholder="End date" >
+            </mat-date-range-input>
+            <mat-date-range-picker #picker ></mat-date-range-picker>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
+
+        <!-- <mat-calendar [minDate]="today" [maxDate]="endDate" [selected]="selectedRangeValue" (selectedChange)="selectedChangeCalender($event)">
+        </mat-calendar>
+        {{getShortDate(start)}} > {{getShortDate(end)}} -->
+
+        <button mat-button [matMenuTriggerFor]="menuStartDate" #startDateTrigger="matMenuTrigger">{{getShortDate(startDate)}}</button>
+        <mat-menu #menuStartDate="matMenu" class="menu-form-wrapper">
+            <div (click)="$event.stopPropagation()">
+            <mat-calendar [(selected)]="startDate" [minDate]="today" [maxDate]="endDateMax" (selectedChange)="selectedChangeFirstDate($event)"></mat-calendar>
+            </div>
+        </mat-menu>
+        ->
+        <button mat-button [matMenuTriggerFor]="menuEndDate" #endDateTrigger="matMenuTrigger">{{getShortDate(endDate)}}</button>
+        <mat-menu #menuEndDate="matMenu" class="menu-form-wrapper">
+            <div (click)="$event.stopPropagation()">
+            <mat-calendar [(selected)]="endDate" [minDate]="startDate" [maxDate]="endDateMax" (selectedChange)="selectedChangeSecondDate($event)"></mat-calendar>
+            </div>
+        </mat-menu>
+        ({{getDayDifference()}})
+    </mat-grid-tile>
+</mat-grid-list>

@@ -26,4 +26,52 @@ body {
     width: 100%;
 }
 
+.adImage {
+    width: 100%;
+    height: 500px;
+    aspect-ratio : 1 / 1;
+    object-fit: cover;
+}
+
+.smallAdImage {
+    width: 90%;
+    height: 200px;
+    aspect-ratio : 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    position: absolute;
+    top: 10px;
+}
+
+.smallAdText {
+    width: 90%;
+    height: 90px;
+    position: absolute;
+    bottom: 00px;
+}
+
+.img-holder {position: relative;}
+.img-holder .rightButton {
+    position: absolute;
+    bottom: 50%;
+    right: 10px; /*your button position*/
+}
+.img-holder .leftButton {
+    position: absolute;
+    bottom: 50%;
+    left: 10px; /*your button position*/
+}
+
+.icon-arrow {
+    transform: scale(2.5);
+ }
+
+ .calendar-card{
+    width: 300px
+ }
+
+.mat-date-range-input-separator{
+    display: none;
+}
+
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";

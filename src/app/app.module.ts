@@ -16,6 +16,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+
 import { DashboardMainComponent } from './dashboard/dashboard-main/dashboard-main.component';
 import { HeaderComponent } from './general/header/header.component';
 import { ParkComponent } from './resortPages/park/park.component';
@@ -44,7 +50,13 @@ import { RestaurantsComponent } from './resortPages/restaurants/restaurants.comp
     MatMenuModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatGridListModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

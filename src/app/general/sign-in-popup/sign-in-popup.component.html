@@ -1,6 +1,6 @@
 <div *ngIf="!userService.loggedIn; else loggedOut">
     <button mat-button [matMenuTriggerFor]="menu" #trigger="matMenuTrigger">Sign-In or Register</button>
-    <mat-menu #menu="matMenu" class="menu-form-wrapper" [hasBackdrop]="false">
+    <mat-menu #menu="matMenu" class="menu-form-wrapper">
         <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
             <form class="menu-form" (ngSubmit)="signin()">
                 <mat-form-field>
@@ -29,7 +29,7 @@
 <ng-template #loggedOut>
     <button mat-button [matMenuTriggerFor]="menu" #trigger="matMenuTrigger">{{userService.currentUser.firstName}}
         {{userService.currentUser.lastName}}</button>
-    <mat-menu #menu="matMenu" class="menu-form-wrapper" [hasBackdrop]="false">
+    <mat-menu #menu="matMenu" class="menu-form-wrapper">
         <span class="menu-form">
             <button routerLink='/dashboard' mat-raised-button>My Trip</button>
             &nbsp;
