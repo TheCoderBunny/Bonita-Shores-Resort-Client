@@ -209,8 +209,9 @@ export class ParkComponent implements OnInit {
       return;
     }
 
-    if (!this.userService.loggedIn) {
-      console.log("Not logged in.");
-    }
+    //Below is not needed now that this button only appears when logged in.
+    // if (!this.userService.loggedIn) {
+    //   console.log("Not logged in.");
+    // }
   }
 }
