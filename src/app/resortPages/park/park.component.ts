@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventEmitter, Input, Output } from '@angular/core';
+import { tick } from '@angular/core/testing';
 import { DateRange } from '@angular/material/datepicker';
 import { MatMenuTrigger } from '@angular/material/menu';
 
@@ -37,7 +38,9 @@ export class ParkComponent implements OnInit {
   selected: Date = new Date();
 
   ngOnInit(): void {
-    this.endDateMax=new Date(this.today.getUTCFullYear() + 1,this.today.getUTCMonth(),this.today.getUTCDate()-1);
+    this.endDateMax = new Date(this.today.getFullYear() + 1, this.today.getMonth(), this.today.getDate() - 1);
+    this.startDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+    this.endDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
   }
 
   @Input() selectedRangeValue: DateRange<Date> | undefined;
@@ -62,21 +65,25 @@ export class ParkComponent implements OnInit {
     this.selectedRangeValueChange.emit(this.selectedRangeValue);
   }
 
-  @ViewChild('startDateTrigger')
-  startDateTrigger!: MatMenuTrigger;
-
-  fixDates(){
-    this.startDateTrigger.closeMenu();
+  fixDates() {
     if (this.endDate < this.startDate) {
       this.endDate = this.startDate;
     }
   }
 
+  @ViewChild('startDateTrigger')
+  startDateTrigger!: MatMenuTrigger;
+
   selectedChangeFirstDate(m: any) {
+    this.startDateTrigger.closeMenu();
     this.fixDates();
   }
 
+  @ViewChild('endDateTrigger')
+  endDateTrigger!: MatMenuTrigger;
+
   selectedChangeSecondDate(m: any) {
+    this.endDateTrigger.closeMenu();
     this.fixDates();
   }
 
@@ -84,16 +91,99 @@ export class ParkComponent implements OnInit {
     "July", "August", "Sept", "Oct", "Nov", "Dec"];
 
   getShortDate(date: Date) {
-    return this.monthNames[date.getUTCMonth()]+" "+date.getUTCDate();
+    return this.monthNames[date.getMonth()] + " " + date.getDate();
   }
 
-  getDayDifference(){//should never be negative
-    var dayDifference = Math.floor((this.endDate.getTime()-this.startDate.getTime())/(1000 * 60 * 60 * 24))
-    console.log(dayDifference)
-    if (dayDifference==0){
-      return (dayDifference+1) + " Day";
-    }else{
-      return (dayDifference+1) + " Days";
+  dayDifference: number = 0;
+  dayDifferenceIcon: string = "forward";
+  oneDay: number = 1000 * 60 * 60 * 24;
+
+  getDayDifference() {//should never be negative
+    this.dayDifference = Math.floor(this.endDate.getTime() / this.oneDay) - Math.floor(this.startDate.getTime() / this.oneDay)
+    // console.log(this.dayDifference);
+    if (this.dayDifference == 0) {
+      this.dayDifferenceIcon = "wb_sunny";
+      return (this.dayDifference + 1) + " Day";
+    } else {
+      this.dayDifferenceIcon = "forward";
+      return (this.dayDifference + 1) + " Days";
     }
+  }
+
+  adultTicketCount: number = 1;
+  childTicketCount: number = 0;
+
+  adjustAdultTicketCount(num: number) {
+    this.adultTicketCount += num;
+    if (this.adultTicketCount < 0) {
+      this.adultTicketCount = 0;
+    }
+  }
+
+  getAdultTicketCount() {
+    if (this.adultTicketCount == 1) {
+      return this.adultTicketCount + " Adult";
+    } else {
+      return this.adultTicketCount + " Adults";
+    }
+  }
+
+  adjustChildTicketCount(num: number) {
+    this.childTicketCount += num;
+    if (this.childTicketCount < 0) {
+      this.childTicketCount = 0;
+    }
+  }
+
+  getChildTicketCount() {
+    if (this.childTicketCount == 1) {
+      return this.childTicketCount + " Child";
+    } else {
+      return this.childTicketCount + " Children";
+    }
+  }
+
+  purchasing: boolean = false;
+
+  purchasingClick(){
+    this.purchasing=true;
+    var checkoutButton = document.getElementById('checkout');
+    if (checkoutButton){
+      // checkoutButton.scrollTop = checkoutButton.scrollHeight;
+      checkoutButton.scrollIntoView();
+    }
+  }
+
+  getTicketCount() {
+    var ticketCount: number = (this.adultTicketCount + this.childTicketCount) * (this.dayDifference + 1);
+    if (ticketCount == 1) {
+      return ticketCount + " Ticket";
+    } else {
+      return ticketCount + " Tickets";
+    }
+  }
+
+  ticketSubtotal: number = 0;
+  taxes: number = 0;
+
+  getTicketTotal() {
+    var adultTickets: number = this.adultTicketCount * (this.dayDifference + 1) * 89.99;
+    var childTickets: number = this.childTicketCount * (this.dayDifference + 1) * 59.99;
+    this.ticketSubtotal = Math.floor((adultTickets + childTickets) * 100) / 100;
+    this.taxes = Math.floor((this.ticketSubtotal * .06) * 100) / 100;
+
+    var total: number = Math.floor((this.ticketSubtotal + this.taxes) * 100) / 100;
+
+    return "$" + total.toLocaleString();
+  }
+
+  getTicketCost() {
+    this.getTicketTotal();
+    return "$" + this.ticketSubtotal.toLocaleString();
+  }
+
+  getTaxes() {
+    this.getTicketTotal();
+    return "$" + this.taxes.toLocaleString();
   }
 }

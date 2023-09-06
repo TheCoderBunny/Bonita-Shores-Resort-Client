@@ -8,17 +8,22 @@
 </div>
 <br>
 
-<mat-grid-list cols="3" rowHeight="300px">
+<mat-grid-list cols="3" rowHeight="600px">
     <mat-grid-tile>
-        <img class="smallAdImage"
-            src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
-        <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Nec dui nunc mattis enim ut tellus.</div>
+        <div class="expand-grid" style="text-align: center;">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Nec dui nunc mattis enim ut tellus.</div>
+        </div>
     </mat-grid-tile>
-    <mat-grid-tile><img class="smallAdImage"
-            src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
-        <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero.</div>
+    <mat-grid-tile>
+        <div class="expand-grid" style="text-align: center;">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero.</div>
+        </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <!-- Below is an old concept, but I feel the newer one is cleaner -->
@@ -32,20 +37,77 @@
         <!-- <mat-calendar [minDate]="today" [maxDate]="endDate" [selected]="selectedRangeValue" (selectedChange)="selectedChangeCalender($event)">
         </mat-calendar>
         {{getShortDate(start)}} > {{getShortDate(end)}} -->
-
-        <button mat-button [matMenuTriggerFor]="menuStartDate" #startDateTrigger="matMenuTrigger">{{getShortDate(startDate)}}</button>
-        <mat-menu #menuStartDate="matMenu" class="menu-form-wrapper">
-            <div (click)="$event.stopPropagation()">
-            <mat-calendar [(selected)]="startDate" [minDate]="today" [maxDate]="endDateMax" (selectedChange)="selectedChangeFirstDate($event)"></mat-calendar>
+        <div class="expand-grid">
+            <div style="text-align: center;">
+                <h1 style="display: inline;"><b>Purchase Tickets</b></h1>
             </div>
-        </mat-menu>
-        ->
-        <button mat-button [matMenuTriggerFor]="menuEndDate" #endDateTrigger="matMenuTrigger">{{getShortDate(endDate)}}</button>
-        <mat-menu #menuEndDate="matMenu" class="menu-form-wrapper">
-            <div (click)="$event.stopPropagation()">
-            <mat-calendar [(selected)]="endDate" [minDate]="startDate" [maxDate]="endDateMax" (selectedChange)="selectedChangeSecondDate($event)"></mat-calendar>
+            Select Days:
+            <hr class="rounded">
+            <div style="height: 36px; text-align: center;">
+                <button mat-button [matMenuTriggerFor]="menuStartDate"
+                    #startDateTrigger="matMenuTrigger">{{getShortDate(startDate)}}</button>
+                <mat-menu yPosition="above" #menuStartDate="matMenu" class="menu-form-wrapper">
+                    <div (click)="$event.stopPropagation()">
+                        <mat-calendar [(selected)]="startDate" [minDate]="today" [maxDate]="endDateMax"
+                            (selectedChange)="selectedChangeFirstDate($event)"></mat-calendar>
+                    </div>
+                </mat-menu>
+                <mat-icon style="vertical-align:middle;">{{dayDifferenceIcon}}</mat-icon>
+                <button mat-button [matMenuTriggerFor]="menuEndDate"
+                    #endDateTrigger="matMenuTrigger">{{getShortDate(endDate)}}</button>
+                <mat-menu yPosition="above" #menuEndDate="matMenu" class="menu-form-wrapper">
+                    <div (click)="$event.stopPropagation()">
+                        <mat-calendar [(selected)]="endDate" [minDate]="startDate" [maxDate]="endDateMax"
+                            (selectedChange)="selectedChangeSecondDate($event)"></mat-calendar>
+                    </div>
+                </mat-menu>
             </div>
-        </mat-menu>
-        ({{getDayDifference()}})
+            <div style="text-align: center;">
+                <h2><b>{{getDayDifference()}}</b></h2>
+            </div>
+            Select Guests:
+            <hr class="rounded">
+            <div style="height: 36px; text-align: center; width: 80%; margin: auto;">
+                <button (click)="adjustAdultTicketCount(-1);" style="position: absolute; left: 10px;" mat-mini-fab
+                    color="secondary">
+                    <mat-icon>remove</mat-icon>
+                </button>
+                <h3 style="display: inline; padding: 20px;">{{getAdultTicketCount()}}</h3>
+                <button (click)="adjustAdultTicketCount(1);" style="position: absolute; right: 10px;" mat-mini-fab
+                    color="secondary">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            <br>
+            <div style="height: 36px; text-align: center; width: 80%; margin: auto;">
+                <button (click)="adjustChildTicketCount(-1);" style="position: absolute; left: 10px;" mat-mini-fab
+                    color="secondary">
+                    <mat-icon>remove</mat-icon>
+                </button>
+                <h3 style="display: inline; padding: 20px;">{{getChildTicketCount()}}</h3>
+                <button (click)="adjustChildTicketCount(1);" style="position: absolute; right: 10px;" mat-mini-fab
+                    color="secondary">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            <br>
+            <hr class="rounded">
+            <div style="height: 36px; text-align: center; width: 80%; margin: auto;" [hidden]="purchasing">
+                <button color="primary" (click)="purchasingClick();" mat-raised-button>Ready!</button>
+            </div>
+            <div [hidden]="!purchasing">
+                Order Summary:
+                <br>
+                Subtotal: ({{getTicketCount()}}) --- {{getTicketCost()}}
+                <br>
+                Taxes: --- {{getTaxes()}}
+                <br>
+                Total: --- {{getTicketTotal()}}
+                <br>
+                <br>
+                <button color="primary" (click)="purchasing=true;" mat-raised-button>Checkout</button>
+            </div>
+            <div id="checkout"></div>
+        </div>
     </mat-grid-tile>
 </mat-grid-list>
