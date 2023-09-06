@@ -89,4 +89,18 @@ hr.rounded {
     height: 100%;
 }
 
+.element-right-side {
+    position: absolute !important;
+    right: 10px !important;
+}
+
+.element-left-side {
+    position: absolute !important;
+    left: 10px !important;
+}
+
+.element-inline {
+    display: inline;
+}
+
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";

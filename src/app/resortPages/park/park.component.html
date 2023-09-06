@@ -41,7 +41,7 @@
             <div style="text-align: center;">
                 <h1 style="display: inline;"><b>Purchase Tickets</b></h1>
             </div>
-            Select Days:
+            <h4><b>Select Days:</b></h4>
             <hr class="rounded">
             <div style="height: 36px; text-align: center;">
                 <button mat-button [matMenuTriggerFor]="menuStartDate"
@@ -65,27 +65,27 @@
             <div style="text-align: center;">
                 <h2><b>{{getDayDifference()}}</b></h2>
             </div>
-            Select Guests:
+            <h4><b>Select Guests:</b></h4>
             <hr class="rounded">
             <div style="height: 36px; text-align: center; width: 80%; margin: auto;">
-                <button (click)="adjustAdultTicketCount(-1);" style="position: absolute; left: 10px;" mat-mini-fab
+                <button (click)="adjustAdultTicketCount(-1);" class="element-left-side" mat-mini-fab
                     color="secondary">
                     <mat-icon>remove</mat-icon>
                 </button>
                 <h3 style="display: inline; padding: 20px;">{{getAdultTicketCount()}}</h3>
-                <button (click)="adjustAdultTicketCount(1);" style="position: absolute; right: 10px;" mat-mini-fab
+                <button (click)="adjustAdultTicketCount(1);" class="element-right-side" mat-mini-fab
                     color="secondary">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
             <br>
             <div style="height: 36px; text-align: center; width: 80%; margin: auto;">
-                <button (click)="adjustChildTicketCount(-1);" style="position: absolute; left: 10px;" mat-mini-fab
+                <button (click)="adjustChildTicketCount(-1);" class="element-left-side" mat-mini-fab
                     color="secondary">
                     <mat-icon>remove</mat-icon>
                 </button>
                 <h3 style="display: inline; padding: 20px;">{{getChildTicketCount()}}</h3>
-                <button (click)="adjustChildTicketCount(1);" style="position: absolute; right: 10px;" mat-mini-fab
+                <button (click)="adjustChildTicketCount(1);" class="element-right-side" mat-mini-fab
                     color="secondary">
                     <mat-icon>add</mat-icon>
                 </button>
@@ -96,16 +96,18 @@
                 <button color="primary" (click)="purchasingClick();" mat-raised-button>Ready!</button>
             </div>
             <div [hidden]="!purchasing">
-                Order Summary:
-                <br>
-                Subtotal: ({{getTicketCount()}}) --- {{getTicketCost()}}
-                <br>
-                Taxes: --- {{getTaxes()}}
-                <br>
-                Total: --- {{getTicketTotal()}}
+                <h4><b>Order Summary:</b></h4>
+                <h4 class="element-inline element-left-side">Subtotal: ({{getTicketCount()}})</h4><h4 class="element-right-side element-inline">{{getTicketCost()}}</h4>
                 <br>
                 <br>
-                <button color="primary" (click)="purchasing=true;" mat-raised-button>Checkout</button>
+                <h4 class="element-inline element-left-side">Taxes:</h4><h4 class="element-right-side element-inline">{{getTaxes()}}</h4>
+                <br>
+                <br>
+                <h4 class="element-inline element-left-side">Total:</h4><h4 class="element-right-side element-inline">{{getTicketTotal()}}</h4>
+                <br>
+                <br>
+                <button [hidden]="!this.userService.loggedIn" color="primary" (click)="checkout();" (click)="purchasing=true;" mat-raised-button>Checkout</button>
+                <sign-in-popup [hidden]="this.userService.loggedIn" style="text-align: center;" [raised]="true" buttonName="Please Sign-In or Register to Checkout" color="primary"></sign-in-popup>
             </div>
             <div id="checkout"></div>
         </div>

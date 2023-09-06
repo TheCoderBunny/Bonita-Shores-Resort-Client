@@ -1,5 +1,6 @@
 <div *ngIf="!userService.loggedIn; else loggedOut">
-    <button mat-button [matMenuTriggerFor]="menu" #trigger="matMenuTrigger">Sign-In or Register</button>
+    <button [hidden]="raised" mat-button color="{{color}}" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger">{{buttonName}}</button>
+    <button [hidden]="!raised" mat-raised-button color="{{color}}" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger">{{buttonName}}</button>
     <mat-menu #menu="matMenu" class="menu-form-wrapper">
         <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
             <form class="menu-form" (ngSubmit)="signin()">

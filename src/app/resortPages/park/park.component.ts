@@ -3,6 +3,7 @@ import { EventEmitter, Input, Output } from '@angular/core';
 import { tick } from '@angular/core/testing';
 import { DateRange } from '@angular/material/datepicker';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-park',
@@ -18,6 +19,10 @@ export class ParkComponent implements OnInit {
 
   currentImage: string = this.imageList[0];
   currentImageInt: number = 0;
+
+  tokenTicketsKey: string = "BSRTicketsToken";
+
+  constructor(public userService: UserService) { }
 
   moveImage(amount: number) {
     this.currentImageInt += amount;
@@ -35,12 +40,22 @@ export class ParkComponent implements OnInit {
   startDate: Date = new Date();
   endDate: Date = new Date();
 
-  selected: Date = new Date();
+  // selected: Date = new Date();
+
+  adultTicketCount: number = 1;
+  childTicketCount: number = 0;
 
   ngOnInit(): void {
     this.endDateMax = new Date(this.today.getFullYear() + 1, this.today.getMonth(), this.today.getDate() - 1);
     this.startDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
     this.endDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+
+    if (localStorage.getItem(this.tokenTicketsKey + "StartDate") != null) {
+      this.startDate = new Date(localStorage.getItem(this.tokenTicketsKey + "StartDate") || this.startDate.toDateString());
+      this.endDate = new Date(localStorage.getItem(this.tokenTicketsKey + "EndDate") || this.endDate.toDateString());
+      this.adultTicketCount = Number(localStorage.getItem(this.tokenTicketsKey + "AdultTicketCount")) || 1;
+      this.childTicketCount = Number(localStorage.getItem(this.tokenTicketsKey + "ChildTicketCount")) || 0;
+    }
   }
 
   @Input() selectedRangeValue: DateRange<Date> | undefined;
@@ -110,9 +125,6 @@ export class ParkComponent implements OnInit {
     }
   }
 
-  adultTicketCount: number = 1;
-  childTicketCount: number = 0;
-
   adjustAdultTicketCount(num: number) {
     this.adultTicketCount += num;
     if (this.adultTicketCount < 0) {
@@ -145,11 +157,10 @@ export class ParkComponent implements OnInit {
 
   purchasing: boolean = false;
 
-  purchasingClick(){
-    this.purchasing=true;
+  purchasingClick() {
+    this.purchasing = true;
     var checkoutButton = document.getElementById('checkout');
-    if (checkoutButton){
-      // checkoutButton.scrollTop = checkoutButton.scrollHeight;
+    if (checkoutButton) {
       checkoutButton.scrollIntoView();
     }
   }
@@ -174,6 +185,11 @@ export class ParkComponent implements OnInit {
 
     var total: number = Math.floor((this.ticketSubtotal + this.taxes) * 100) / 100;
 
+    localStorage.setItem(this.tokenTicketsKey + "StartDate", this.startDate.toDateString());
+    localStorage.setItem(this.tokenTicketsKey + "EndDate", this.endDate.toDateString());
+    localStorage.setItem(this.tokenTicketsKey + "AdultTicketCount", this.adultTicketCount.toString());
+    localStorage.setItem(this.tokenTicketsKey + "ChildTicketCount", this.childTicketCount.toString());
+
     return "$" + total.toLocaleString();
   }
 
@@ -185,5 +201,16 @@ export class ParkComponent implements OnInit {
   getTaxes() {
     this.getTicketTotal();
     return "$" + this.taxes.toLocaleString();
+  }
+
+  checkout() {
+    if (this.ticketSubtotal === 0) {
+      console.log("No tickets were selected");
+      return;
+    }
+
+    if (!this.userService.loggedIn) {
+      console.log("Not logged in.");
+    }
   }
 }
