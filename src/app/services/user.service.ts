@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../models/user';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { Ticket } from '../models/ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -59,12 +60,12 @@ export class UserService {
 
   signUp(newUser: User) {
     return this.http.post(`${this.baseURL}/user/register`, newUser).pipe(tap((response: any) => {
-      this.login(newUser.email || "", newUser.password || "").subscribe((response:any) => {
+      this.login(newUser.email || "", newUser.password || "").subscribe((response: any) => {
         this.router.navigateByUrl('/home')
-       }, error => {
-           console.log('Error: ', error);
-           window.alert('Unsuccessful Login');
-       });
+      }, error => {
+        console.log('Error: ', error);
+        window.alert('Unsuccessful Login');
+      });
     }));
   }
 
@@ -85,5 +86,16 @@ export class UserService {
       Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
     }
     return this.http.get<User>(this.baseURL + "/user/current", { headers: reqHeaders });
+  }
+
+  createTickets(tickets: Ticket[]) {
+    if (localStorage.getItem(this.tokenKey) == null) { return null; }
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    }
+
+    return this.http.post(`${this.baseURL}/ticket/createTickets`, tickets, { headers: reqHeaders }).pipe(tap((response: any) => {
+
+    }));
   }
 }

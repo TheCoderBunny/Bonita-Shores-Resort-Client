@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-loading-popup',
@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class LoadingPopupComponent {
 
+  text: string = "Loading...";
+  hidden: boolean = true;
+
+  toggle(hide: boolean, message: string) {
+    this.text = message;
+    this.hidden = hide;
+  }
 }

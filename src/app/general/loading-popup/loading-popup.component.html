@@ -1,7 +1,9 @@
-<div class="background-cover"></div>
-<div class="floating-center">
-    <br>
-    <mat-spinner></mat-spinner>
-    <br>
-    <h1>Loading...</h1>
+<div [hidden]="hidden">
+    <div class="background-cover"></div>
+    <div class="floating-center">
+        <br>
+        <mat-spinner></mat-spinner>
+        <br>
+        <h1>{{text}}</h1>
+    </div>
 </div>

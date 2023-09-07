@@ -3,6 +3,8 @@ import { EventEmitter, Input, Output } from '@angular/core';
 import { tick } from '@angular/core/testing';
 import { DateRange } from '@angular/material/datepicker';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { LoadingPopupComponent } from 'src/app/general/loading-popup/loading-popup.component';
+import { Ticket } from 'src/app/models/ticket';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -203,6 +205,11 @@ export class ParkComponent implements OnInit {
     return "$" + this.taxes.toLocaleString();
   }
 
+  @ViewChild('loading')
+  loading!: LoadingPopupComponent;
+
+  ticketsToPurchase: Ticket[] = [];
+
   checkout() {
     if (this.ticketSubtotal === 0) {
       console.log("No tickets were selected");
@@ -214,8 +221,35 @@ export class ParkComponent implements OnInit {
     //   console.log("Not logged in.");
     // }
 
-    //submit the current information to the server?
+    this.loading.toggle(false, "Purchasing...");
+    this.ticketsToPurchase = [];
+    //add the tickets to this list
+    for (let i = 0; i < this.dayDifference + 1; i++) {
+      var day: Date = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate() + i);
+      for (let i = 0; i < this.adultTicketCount; i++) {
+        var newTicket: Ticket = new Ticket(day, 0);//an adult ticket is type 0 (Make a service that universally holds this information.)
+        this.ticketsToPurchase.push(newTicket);
+      }
+      for (let i = 0; i < this.childTicketCount; i++) {
+        var newTicket: Ticket = new Ticket(day, 1);//a child ticket is type 1 (Make a service that universally holds this information.)
+        this.ticketsToPurchase.push(newTicket);
+      }
+    }
 
-    
+    // console.log(ticketsToPurchase);
+
+
+    var reply = this.userService.createTickets(this.ticketsToPurchase);
+
+    if (reply === null) { return; }
+    reply.subscribe((response: any) => {
+      this.loading.toggle(true, "Completed");
+    }, error => {
+      console.log('Error: ', error);
+      window.alert('Unsuccessful Purchase');
+      this.loading.toggle(true, "Unseccessful");
+      //  this.router.navigateByUrl('/signin');
+    });
+
   }
 }
