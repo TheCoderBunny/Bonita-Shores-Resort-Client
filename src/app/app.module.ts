@@ -21,12 +21,15 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { DashboardMainComponent } from './dashboard/dashboard-main/dashboard-main.component';
 import { HeaderComponent } from './general/header/header.component';
 import { ParkComponent } from './resortPages/park/park.component';
 import { HotelsComponent } from './resortPages/hotels/hotels.component';
 import { RestaurantsComponent } from './resortPages/restaurants/restaurants.component';
+import { LoadingPopupComponent } from './general/loading-popup/loading-popup.component';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { RestaurantsComponent } from './resortPages/restaurants/restaurants.comp
     HeaderComponent,
     ParkComponent,
     HotelsComponent,
-    RestaurantsComponent
+    RestaurantsComponent,
+    LoadingPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,8 @@ import { RestaurantsComponent } from './resortPages/restaurants/restaurants.comp
     MatDatepickerModule,
     MatCardModule,
     MatNativeDateModule,
-    MatRippleModule
+    MatRippleModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

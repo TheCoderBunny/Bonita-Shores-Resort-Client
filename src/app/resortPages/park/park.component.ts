@@ -213,5 +213,9 @@ export class ParkComponent implements OnInit {
     // if (!this.userService.loggedIn) {
     //   console.log("Not logged in.");
     // }
+
+    //submit the current information to the server?
+
+    
   }
 }
