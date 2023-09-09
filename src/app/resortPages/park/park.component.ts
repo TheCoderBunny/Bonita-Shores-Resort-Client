@@ -3,6 +3,7 @@ import { EventEmitter, Input, Output } from '@angular/core';
 import { tick } from '@angular/core/testing';
 import { DateRange } from '@angular/material/datepicker';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { Router } from '@angular/router';
 import { LoadingPopupComponent } from 'src/app/general/loading-popup/loading-popup.component';
 import { Ticket } from 'src/app/models/ticket';
 import { UserService } from 'src/app/services/user.service';
@@ -24,7 +25,7 @@ export class ParkComponent implements OnInit {
 
   tokenTicketsKey: string = "BSRTicketsToken";
 
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserService, private router: Router) { }
 
   moveImage(amount: number) {
     this.currentImageInt += amount;
@@ -244,11 +245,15 @@ export class ParkComponent implements OnInit {
     if (reply === null) { return; }
     reply.subscribe((response: any) => {
       this.loading.toggle(true, "Completed");
+      localStorage.removeItem(this.tokenTicketsKey + "StartDate");
+      localStorage.removeItem(this.tokenTicketsKey + "EndDate");
+      localStorage.removeItem(this.tokenTicketsKey + "AdultTicketCount");
+      localStorage.removeItem(this.tokenTicketsKey + "ChildTicketCount");
+      this.router.navigateByUrl('/dashboard');
     }, error => {
       console.log('Error: ', error);
       window.alert('Unsuccessful Purchase');
-      this.loading.toggle(true, "Unseccessful");
-      //  this.router.navigateByUrl('/signin');
+      this.loading.toggle(true, "Unsuccessful");
     });
 
   }

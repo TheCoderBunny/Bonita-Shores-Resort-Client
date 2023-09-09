@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { Ticket } from '../models/ticket';
+import { Trip } from '../models/trip';
 
 @Injectable({
   providedIn: 'root'
@@ -97,5 +98,14 @@ export class UserService {
     return this.http.post(`${this.baseURL}/ticket/createTickets`, tickets, { headers: reqHeaders }).pipe(tap((response: any) => {
 
     }));
+  }
+
+  getFutureTicketsFromDay(day: Date): Observable<Trip> {
+    if (localStorage.getItem(this.tokenKey) == null) { return new Observable<Trip> }
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    }
+    var dayString=day.getFullYear()+"-"+day.getMonth()+"-"+day.getDate()
+    return this.http.get<Trip>(this.baseURL + "/GuestDashboard/getTripFutureFromDay/"+dayString, { headers: reqHeaders });
   }
 }
