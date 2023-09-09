@@ -105,7 +105,8 @@ export class UserService {
     let reqHeaders = {
       Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
     }
-    var dayString=day.getFullYear()+"-"+day.getMonth()+"-"+day.getDate()
+    var dayString=day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate()
+    console.log(dayString);
     return this.http.get<Trip>(this.baseURL + "/GuestDashboard/getTripFutureFromDay/"+dayString, { headers: reqHeaders });
   }
 }

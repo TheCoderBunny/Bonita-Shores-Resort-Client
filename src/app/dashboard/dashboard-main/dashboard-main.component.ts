@@ -23,7 +23,7 @@ export class DashboardMainComponent implements OnInit {
       console.log(response)
     }, error => {
       console.log('Error: ', error);
-      window.alert('Unsuccessful Purchase');
+      window.alert('Unable to retrive trip');
     });
 
   }
