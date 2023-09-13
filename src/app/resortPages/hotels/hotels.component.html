@@ -1,2 +1,110 @@
+<app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
-<p>hotels works!</p>
+<div class="img-holder">
+    <img class="adImage" src={{currentImage}}>
+    <button class="rightButton" mat-fab (click)="moveImage(1)"><mat-icon
+            class="icon-arrow">keyboard_arrow_right</mat-icon></button>
+    <button class="leftButton" mat-fab (click)="moveImage(-1)"><mat-icon
+            class="icon-arrow">keyboard_arrow_left</mat-icon></button>
+</div>
+<br>
+
+<mat-grid-list cols="3" rowHeight="800px">
+    <mat-grid-tile>
+        <div class="expand-grid" style="text-align: center;">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Nec dui nunc mattis enim ut tellus.</div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="expand-grid" style="text-align: center;">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero.</div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="expand-grid">
+            <div style="text-align: center;">
+                <h1 style="display: inline;"><b>Book a Room</b></h1>
+            </div>
+            <h4><b>Check-in - Check-out:</b></h4>
+            <hr class="rounded">
+            <div style="height: 36px; text-align: center;">
+                <button mat-button [matMenuTriggerFor]="menuStartDate"
+                    #startDateTrigger="matMenuTrigger">{{getShortDate(startDate)}}</button>
+                <mat-menu yPosition="above" #menuStartDate="matMenu" class="menu-form-wrapper">
+                    <div (click)="$event.stopPropagation()">
+                        <mat-calendar [(selected)]="startDate" [minDate]="today" [maxDate]="endDateMax"
+                            (selectedChange)="selectedChangeFirstDate($event)"></mat-calendar>
+                    </div>
+                </mat-menu>
+                <mat-icon style="vertical-align:middle;">{{dayDifferenceIcon}}</mat-icon>
+                <button mat-button [matMenuTriggerFor]="menuEndDate"
+                    #endDateTrigger="matMenuTrigger">{{getShortDate(endDate)}}</button>
+                <mat-menu yPosition="above" #menuEndDate="matMenu" class="menu-form-wrapper">
+                    <div (click)="$event.stopPropagation()">
+                        <mat-calendar [(selected)]="endDate" [minDate]="startDate" [maxDate]="endDateMax"
+                            (selectedChange)="selectedChangeSecondDate($event)"></mat-calendar>
+                    </div>
+                </mat-menu>
+            </div>
+            <div style="text-align: center;">
+                <h2><b>{{getDayDifference()}}</b></h2>
+            </div>
+            <h4><b>Select Hotel:</b></h4>
+            <hr class="rounded">
+            <div *ngFor="let hotel of databaseLocal.hotels; let i = index">
+                <div *ngIf="i==currentHotelID; else notChosen">
+                    <button (click)="chooseHotel(i)" color="primary" mat-raised-button>{{hotel.name}}</button>
+                </div>
+                <ng-template #notChosen>
+                    <button (click)="chooseHotel(i)" mat-button>{{hotel.name}}</button>
+                </ng-template>
+            </div>
+            <br>
+            <br>
+            <br>
+            <h4><b>Select Room:</b></h4>
+            <hr class="rounded">
+            <div *ngFor="let room of this.roomList; let i = index">
+                <div *ngIf="i==currentRoomID; else notChosen">
+                    <button (click)="chooseRoom(i)" color="primary" mat-raised-button>{{room.name}}</button>
+                </div>
+                <ng-template #notChosen>
+                    <button (click)="chooseRoom(i)" mat-button>{{room.name}}</button>
+                </ng-template>
+            </div>
+            <br>
+            <br>
+            <br>
+            <hr class="rounded">
+            <div style="height: 36px; text-align: center; width: 80%; margin: auto;" [hidden]="purchasing">
+                <button color="primary" (click)="purchasingClick();" mat-raised-button>Calculate Total</button>
+            </div>
+            <div [hidden]="!purchasing">
+                <h4><b>Order Summary:</b></h4>
+                <h4 class="element-inline element-left-side">Subtotal: </h4>
+                <h4 class="element-right-side element-inline">{{getBookingCost()}}</h4>
+                <br>
+                <br>
+                <h4 class="element-inline element-left-side">Taxes:</h4>
+                <h4 class="element-right-side element-inline">{{getTaxes()}}</h4>
+                <br>
+                <br>
+                <h4 class="element-inline element-left-side">Total:</h4>
+                <h4 class="element-right-side element-inline">{{getBookingTotal()}}</h4>
+                <br>
+                <br>
+                <button [hidden]="!this.userService.loggedIn" color="primary" (click)="checkout();"
+                    (click)="purchasing=true;" mat-raised-button>Checkout</button>
+                <sign-in-popup [hidden]="this.userService.loggedIn" style="text-align: center;" [raised]="true"
+                    buttonName="Please Sign-In or Register to Checkout" color="primary"></sign-in-popup>
+            </div>
+            <div id="checkout"></div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

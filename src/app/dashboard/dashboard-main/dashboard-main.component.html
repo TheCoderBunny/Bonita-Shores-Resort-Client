@@ -1,2 +1,28 @@
 <app-header></app-header>
-<p>dashboard-main works!</p>
+
+<div *ngFor="let tripDay of tripDays">
+    <mat-card style="width: 400px; margin: 10px;">
+        {{tripDay.day!.toDateString()}}
+        <div *ngIf="tripDay.tickets.length>0">
+            <br>
+            Tickets:
+            <mat-card-content>
+                <!-- <div *ngFor="let ticket of tripDay.tickets">
+                    {{ticket.type}}
+                </div> -->
+                <div *ngFor="let ticketType of displayTickets(tripDay.tickets)">
+                    {{ticketType}}
+                </div>
+            </mat-card-content>
+        </div>
+        <div *ngIf="tripDay.bookings.length>0">
+            <br>
+            Hotel Booking:
+            <mat-card-content>
+                <div *ngFor="let bookingType of displayBooking(tripDay.bookings)">
+                    {{bookingType}}
+                </div>
+            </mat-card-content>
+        </div>
+    </mat-card>
+</div>

@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventEmitter, Input, Output } from '@angular/core';
-import { tick } from '@angular/core/testing';
 import { DateRange } from '@angular/material/datepicker';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { LoadingPopupComponent } from 'src/app/general/loading-popup/loading-popup.component';
 import { Ticket } from 'src/app/models/ticket';
+import { DatabaseLocal } from 'src/app/services/database-local';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class ParkComponent implements OnInit {
 
   tokenTicketsKey: string = "BSRTicketsToken";
 
-  constructor(public userService: UserService, private router: Router) { }
+  constructor(public userService: UserService, private router: Router, private databaseLocal: DatabaseLocal) { }
 
   moveImage(amount: number) {
     this.currentImageInt += amount;
@@ -181,8 +181,8 @@ export class ParkComponent implements OnInit {
   taxes: number = 0;
 
   getTicketTotal() {
-    var adultTickets: number = this.adultTicketCount * (this.dayDifference + 1) * 89.99;
-    var childTickets: number = this.childTicketCount * (this.dayDifference + 1) * 59.99;
+    var adultTickets: number = this.adultTicketCount * (this.dayDifference + 1) * this.databaseLocal.tickets[0].count;
+    var childTickets: number = this.childTicketCount * (this.dayDifference + 1) * this.databaseLocal.tickets[1].count;
     this.ticketSubtotal = Math.floor((adultTickets + childTickets) * 100) / 100;
     this.taxes = Math.floor((this.ticketSubtotal * .06) * 100) / 100;
 

@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { Ticket } from '../models/ticket';
 import { Trip } from '../models/trip';
+import { Booking } from '../models/booking';
 
 @Injectable({
   providedIn: 'root'
@@ -100,7 +101,18 @@ export class UserService {
     }));
   }
 
-  getFutureTicketsFromDay(day: Date): Observable<Trip> {
+  createBooking(booking: Booking[]) {
+    if (localStorage.getItem(this.tokenKey) == null) { return null; }
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    }
+
+    return this.http.post(`${this.baseURL}/booking/create`, booking, { headers: reqHeaders }).pipe(tap((response: any) => {
+
+    }));
+  }
+
+  getTripFutureFromDay(day: Date): Observable<Trip> {
     if (localStorage.getItem(this.tokenKey) == null) { return new Observable<Trip> }
     let reqHeaders = {
       Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
