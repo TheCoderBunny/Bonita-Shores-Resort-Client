@@ -19,7 +19,7 @@ export class DatabaseLocal {
 
     public restaurantTimes: StoredData[] = [];
     public restaurants: StoredData[] = [
-        new StoredData("Cafe",
+        new StoredData("The Cafe",
             "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
             96),//96 is how many times there are, which is a 24 hour period times 4. This allows for choices every 15 minutes. Not all will be used.
         new StoredData("Restaurant 2",
@@ -92,6 +92,13 @@ export class DatabaseLocal {
             }
         }
         return times;
+    }
+
+    getRestaurantAndTimeFromTypeID(typeID: number) {
+        var restaurantID: number = Math.floor(typeID / 1000);
+        var restaurant: StoredData = this.restaurants[restaurantID];
+        var time: StoredData = this.restaurantTimes[typeID];
+        return { restaurant, time };
     }
 
     constructor() {

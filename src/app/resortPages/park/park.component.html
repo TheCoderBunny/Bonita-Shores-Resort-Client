@@ -108,7 +108,7 @@
                 <br>
                 <br>
                 <button [hidden]="!this.userService.loggedIn" color="primary" (click)="checkout();" (click)="purchasing=true;" mat-raised-button>Checkout</button>
-                <sign-in-popup [hidden]="this.userService.loggedIn" style="text-align: center;" [raised]="true" buttonName="Please Sign-In or Register to Checkout" color="primary"></sign-in-popup>
+                <sign-in-popup [hidden]="this.userService.loggedIn" style="text-align: center;" [raised]="true" buttonName="Sign-In or Register to Checkout" color="primary"></sign-in-popup>
             </div>
             <div id="checkout"></div>
         </div>

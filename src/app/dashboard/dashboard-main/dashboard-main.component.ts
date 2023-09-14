@@ -6,6 +6,7 @@ import { Ticket } from 'src/app/models/ticket';
 import { StoredData } from 'src/app/models/stored-data';
 import { DatabaseLocal } from 'src/app/services/database-local';
 import { Booking } from 'src/app/models/booking';
+import { Reservation } from 'src/app/models/reservation';
 
 @Component({
   selector: 'app-dashboard-main',
@@ -64,6 +65,21 @@ export class DashboardMainComponent implements OnInit {
         }
       }
 
+      if (this.trip.reservations) {
+        for (var reservation of this.trip.reservations) {
+          var day: Date = new Date(reservation.day!)
+          var dayNumber = Math.floor(day.getTime() / this.oneDay) - Math.floor(today.getTime() / this.oneDay)
+          if (this.tripDays[dayNumber] === undefined) {//if this day isn't listed make a new day and add the reservation
+            var tripDay: Trip = new Trip();
+            tripDay.day = new Date(today.getFullYear(), today.getMonth(), today.getDate() + dayNumber)
+            this.tripDays[dayNumber] = tripDay;
+            this.tripDays[dayNumber].reservations.push(reservation);
+          } else {//if this day exists add the reservation
+            this.tripDays[dayNumber].reservations.push(reservation);
+          }
+        }
+      }
+
       //fill in the empty days
       for (let i = 0; i < this.tripDays.length; i++) {
         if (this.tripDays[i] === undefined) {
@@ -104,9 +120,9 @@ export class DashboardMainComponent implements OnInit {
     return strings;
   }
 
-  displayBooking(bookingDay: Booking[]): string[] {
+  displayBookings(bookingDay: Booking[]): string[] {
     var strings: string[] = [];
-    var count: number[] = [];//this is a count for each ticket type.
+    var count: number[] = [];//this is a count for each booking type.
     for (let i = 0; i < bookingDay.length; i++) {
       var booking: Booking = bookingDay[i];
       if (count[booking.type]===undefined){
@@ -120,6 +136,29 @@ export class DashboardMainComponent implements OnInit {
         if (count[i]>0){
           var hotelAndRoom=this.databaseLocal.getHotelAndRoomFromTypeID(i);
           strings.push(count[i] + "x "+hotelAndRoom.room.name + " at "+hotelAndRoom.hotel.name);
+        }
+      }
+    }
+
+    return strings;
+  }
+
+  displayReservations(reservations: Reservation[]): string[] {
+    var strings: string[] = [];
+    var count: number[] = [];//this is a count for each reservation type.
+    for (let i = 0; i < reservations.length; i++) {
+      var reservation: Reservation = reservations[i];
+      if (count[reservation.type]===undefined){
+        count[reservation.type]=0;
+      }
+      count[reservation.type]+=1;
+    }
+
+    for (let i = 0; i < count.length; i++) {
+      if (count[i]!==undefined){
+        if (count[i]>0){
+          var restaurantAndTime=this.databaseLocal.getRestaurantAndTimeFromTypeID(i);
+          strings.push(restaurantAndTime.time.name + " at " + restaurantAndTime.restaurant.name);
         }
       }
     }

@@ -1,11 +1,12 @@
 <app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
 <div class="img-holder">
-    <img class="adImage" src={{currentImage}}>
+    <img class="adImage" src={{currentRestaurant.extra}}>
     <button class="rightButton" mat-fab (click)="changeRestaurant(1)"><mat-icon
             class="icon-arrow">keyboard_arrow_right</mat-icon></button>
     <button class="leftButton" mat-fab (click)="changeRestaurant(-1)"><mat-icon
             class="icon-arrow">keyboard_arrow_left</mat-icon></button>
+    <div class="title"><h1 style="font-size: 3em; color: white;"><b>{{currentRestaurant.name}}</b></h1></div>
 </div>
 <br>
 
@@ -39,42 +40,35 @@
                     <button (click)="chooseHotel(i)" mat-button>{{hotel.name}}</button>
                 </ng-template>
             </div> -->
-            <h4><b>Check-in - Check-out:</b></h4>
+            <h4><b>Reserve Date & Time for {{currentRestaurant.name}}:</b></h4>
             <hr class="rounded">
-            <div style="height: 36px; text-align: center;">
-                <button mat-button [matMenuTriggerFor]="menuStartDate"
+            <div style="height: 40px; text-align: center;">
+                <button style="width: 212px;" mat-stroked-button [matMenuTriggerFor]="menuStartDate"
                     #startDateTrigger="matMenuTrigger">{{getShortDate(startDate)}}</button>
+            </div>
+            <div style="height: 80px; text-align: center;">
                 <mat-menu yPosition="above" #menuStartDate="matMenu" class="menu-form-wrapper">
                     <div (click)="$event.stopPropagation()">
                         <mat-calendar [(selected)]="startDate" [minDate]="today" [maxDate]="endDateMax"
                             (selectedChange)="selectedChangeFirstDate($event)"></mat-calendar>
                     </div>
                 </mat-menu>
-                <!-- <mat-icon style="vertical-align:middle;">{{dayDifferenceIcon}}</mat-icon> -->
-                <!-- <button mat-button [matMenuTriggerFor]="menuEndDate"
-                    #endDateTrigger="matMenuTrigger">{{getShortDate(endDate)}}</button>
-                <mat-menu yPosition="above" #menuEndDate="matMenu" class="menu-form-wrapper">
-                    <div (click)="$event.stopPropagation()">
-                        <mat-calendar [(selected)]="endDate" [minDate]="startDate" [maxDate]="endDateMax"
-                            (selectedChange)="selectedChangeSecondDate($event)"></mat-calendar>
-                    </div>
-                </mat-menu> -->
+                <mat-form-field appearance="outline">
+                    <mat-label>Time:</mat-label>
+                    <mat-select #timeSelector (selectionChange)="selectTime($event.value)">
+                        <mat-option *ngFor="let time of restaurantTimes;" [value]="time.count">
+                            {{time.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-
-            <mat-form-field>
-                <mat-label>Time:</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let time of restaurantTimes;" [value]="time.count">
-                        {{time.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
 
             <div style="text-align: center;">
                 <!-- <h2><b>{{getDayDifference()}}</b></h2> -->
             </div>
             <div style="height: 36px; text-align: center; width: 80%; margin: auto;">
-                <button color="primary" mat-raised-button>Reserve Time</button>
+                <button [disabled]="selectedRestaurantType==-1" [hidden]="!this.userService.loggedIn" color="primary" (click)="reserveTime()" mat-raised-button>Reserve Time</button>
+                <sign-in-popup [hidden]="this.userService.loggedIn" style="text-align: center;" [raised]="true" buttonName="Sign-In or Register to Reserve" color="primary"></sign-in-popup>
             </div>
         </div>
     </mat-grid-tile>

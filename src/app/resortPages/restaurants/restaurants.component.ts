@@ -1,6 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatOption } from '@angular/material/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
+import { LoadingPopupComponent } from 'src/app/general/loading-popup/loading-popup.component';
+import { Reservation } from 'src/app/models/reservation';
 import { StoredData } from 'src/app/models/stored-data';
 import { DatabaseLocal } from 'src/app/services/database-local';
 import { UserService } from 'src/app/services/user.service';
@@ -11,13 +15,14 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./restaurants.component.css']
 })
 export class RestaurantsComponent {
-  currentImage: string = this.databaseLocal.restaurants[0].extra;
+  currentRestaurant: StoredData = this.databaseLocal.restaurants[0];
   currentRestaurantInt: number = 0;
+  selectedRestaurantType: number = -1;
   restaurantTimes: StoredData[] = [];
 
-  tokenBookingKey: string = "BSRBookingToken";
-
   constructor(public userService: UserService, private router: Router, public databaseLocal: DatabaseLocal) { }
+
+  @ViewChild('timeSelector') timeSelector!: MatSelect;
 
   changeRestaurant(amount: number) {
     this.currentRestaurantInt += amount;
@@ -26,10 +31,15 @@ export class RestaurantsComponent {
     } else if (this.currentRestaurantInt > this.databaseLocal.restaurants.length - 1) {
       this.currentRestaurantInt = 0;
     }
-    this.currentImage = this.databaseLocal.restaurants[this.currentRestaurantInt].extra;
+    this.currentRestaurant = this.databaseLocal.restaurants[this.currentRestaurantInt];
 
     //get the list of possible times to reserve
     this.restaurantTimes = this.databaseLocal.retrieveRestaurantTimes(this.currentRestaurantInt);
+
+    this.selectedRestaurantType = -1;
+    if (this.timeSelector !== undefined) {
+      this.timeSelector.options.forEach((data: MatOption) => data.deselect());
+    }
   }
 
 
@@ -40,12 +50,6 @@ export class RestaurantsComponent {
   ngOnInit(): void {
     this.endDateMax = new Date(this.today.getFullYear() + 1, this.today.getMonth(), this.today.getDate() - 1);
     this.startDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
-
-    // if (localStorage.getItem(this.tokenBookingKey + "StartDate") != null) {
-    //   this.startDate = new Date(localStorage.getItem(this.tokenBookingKey + "StartDate") || this.startDate.toDateString());
-    //   this.endDate = new Date(localStorage.getItem(this.tokenBookingKey + "EndDate") || this.endDate.toDateString());
-    // }
-
     this.changeRestaurant(0);
   }
 
@@ -61,6 +65,39 @@ export class RestaurantsComponent {
 
   selectedChangeFirstDate(m: any) {
     this.startDateTrigger.closeMenu();
+  }
+
+  selectTime(value: number) {
+    this.selectedRestaurantType = value;
+    if (this.selectedRestaurantType === undefined) {
+      this.selectedRestaurantType = -1;
+    }
+  }
+
+  @ViewChild('loading')
+  loading!: LoadingPopupComponent;
+
+  reserveTime() {
+    if (this.selectedRestaurantType == -1) {
+      return;//select a time
+    }
+    console.log(this.startDate,this.selectedRestaurantType);
+
+    this.loading.toggle(false, "Reserving...");
+
+    var reservation:Reservation = new Reservation(this.startDate,this.selectedRestaurantType)
+
+    var reply = this.userService.createReservation(reservation);
+
+    if (reply === null) { return; }
+    reply.subscribe((response: any) => {
+      this.loading.toggle(true, "Completed");
+      this.router.navigateByUrl('/dashboard');
+    }, error => {
+      console.log('Error: ', error);
+      window.alert('Unsuccessful Reservation');
+      this.loading.toggle(true, "Unsuccessful");
+    });
   }
 
 }

@@ -19,8 +19,17 @@
             <br>
             Hotel Booking:
             <mat-card-content>
-                <div *ngFor="let bookingType of displayBooking(tripDay.bookings)">
+                <div *ngFor="let bookingType of displayBookings(tripDay.bookings)">
                     {{bookingType}}
+                </div>
+            </mat-card-content>
+        </div>
+        <div *ngIf="tripDay.reservations.length>0">
+            <br>
+            Reservations:
+            <mat-card-content>
+                <div *ngFor="let reservationType of displayReservations(tripDay.reservations)">
+                    {{reservationType}}
                 </div>
             </mat-card-content>
         </div>

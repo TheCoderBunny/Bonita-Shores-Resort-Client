@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Ticket } from '../models/ticket';
 import { Trip } from '../models/trip';
 import { Booking } from '../models/booking';
+import { Reservation } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -108,6 +109,17 @@ export class UserService {
     }
 
     return this.http.post(`${this.baseURL}/booking/create`, booking, { headers: reqHeaders }).pipe(tap((response: any) => {
+
+    }));
+  }
+
+  createReservation(reservation: Reservation){
+    if (localStorage.getItem(this.tokenKey) == null) { return null; }
+    let reqHeaders = {
+      Authorization: `Bearer ${localStorage.getItem(this.tokenKey)}`
+    }
+
+    return this.http.post(`${this.baseURL}/reservation/create`, reservation, { headers: reqHeaders }).pipe(tap((response: any) => {
 
     }));
   }
