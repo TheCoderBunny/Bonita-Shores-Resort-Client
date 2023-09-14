@@ -145,7 +145,7 @@ export class HotelsComponent {
     }
 
     this.chooseHotel(0);
-    this.chooseHotel(0);
+    this.chooseRoom(0);
   }
 
   purchasing: boolean = false;

@@ -1,2 +1,81 @@
+<app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
-<p>restaurants works!</p>
+<div class="img-holder">
+    <img class="adImage" src={{currentImage}}>
+    <button class="rightButton" mat-fab (click)="changeRestaurant(1)"><mat-icon
+            class="icon-arrow">keyboard_arrow_right</mat-icon></button>
+    <button class="leftButton" mat-fab (click)="changeRestaurant(-1)"><mat-icon
+            class="icon-arrow">keyboard_arrow_left</mat-icon></button>
+</div>
+<br>
+
+<mat-grid-list cols="3" rowHeight="800px">
+    <mat-grid-tile>
+        <div class="expand-grid" style="text-align: center;">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Nec dui nunc mattis enim ut tellus.</div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="expand-grid" style="text-align: center;">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero.</div>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="expand-grid">
+            <!-- this should be a big page, which allows clients to swipe through different restuarants. -->
+            <!-- <h4><b>Choose a Restaurant:</b></h4>
+            <hr class="rounded">
+            <div *ngFor="let hotel of databaseLocal.hotels; let i = index">
+                <div *ngIf="i==currentHotelID; else notChosen">
+                    <button (click)="chooseHotel(i)" color="primary" mat-raised-button>{{hotel.name}}</button>
+                </div>
+                <ng-template #notChosen>
+                    <button (click)="chooseHotel(i)" mat-button>{{hotel.name}}</button>
+                </ng-template>
+            </div> -->
+            <h4><b>Check-in - Check-out:</b></h4>
+            <hr class="rounded">
+            <div style="height: 36px; text-align: center;">
+                <button mat-button [matMenuTriggerFor]="menuStartDate"
+                    #startDateTrigger="matMenuTrigger">{{getShortDate(startDate)}}</button>
+                <mat-menu yPosition="above" #menuStartDate="matMenu" class="menu-form-wrapper">
+                    <div (click)="$event.stopPropagation()">
+                        <mat-calendar [(selected)]="startDate" [minDate]="today" [maxDate]="endDateMax"
+                            (selectedChange)="selectedChangeFirstDate($event)"></mat-calendar>
+                    </div>
+                </mat-menu>
+                <!-- <mat-icon style="vertical-align:middle;">{{dayDifferenceIcon}}</mat-icon> -->
+                <!-- <button mat-button [matMenuTriggerFor]="menuEndDate"
+                    #endDateTrigger="matMenuTrigger">{{getShortDate(endDate)}}</button>
+                <mat-menu yPosition="above" #menuEndDate="matMenu" class="menu-form-wrapper">
+                    <div (click)="$event.stopPropagation()">
+                        <mat-calendar [(selected)]="endDate" [minDate]="startDate" [maxDate]="endDateMax"
+                            (selectedChange)="selectedChangeSecondDate($event)"></mat-calendar>
+                    </div>
+                </mat-menu> -->
+            </div>
+
+            <mat-form-field>
+                <mat-label>Time:</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let time of restaurantTimes;" [value]="time.count">
+                        {{time.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div style="text-align: center;">
+                <!-- <h2><b>{{getDayDifference()}}</b></h2> -->
+            </div>
+            <div style="height: 36px; text-align: center; width: 80%; margin: auto;">
+                <button color="primary" mat-raised-button>Reserve Time</button>
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

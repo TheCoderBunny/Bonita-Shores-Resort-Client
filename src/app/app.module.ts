@@ -21,7 +21,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 import { DashboardMainComponent } from './dashboard/dashboard-main/dashboard-main.component';
 import { HeaderComponent } from './general/header/header.component';
@@ -61,7 +62,8 @@ import { LoadingPopupComponent } from './general/loading-popup/loading-popup.com
     MatCardModule,
     MatNativeDateModule,
     MatRippleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
