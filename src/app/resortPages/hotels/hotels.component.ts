@@ -16,27 +16,49 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent {
-  imageList: string[] = [
-    "https://images.unsplash.com/photo-1570444952548-756e3fc089fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    "https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
-    "https://images.unsplash.com/photo-1547737412-04c9cf2b0f56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1933&q=80"];
+  currentHotel: StoredData = this.databaseLocal.hotels[0];
+  currentHotelInt: number = 0;
 
-  currentImage: string = this.imageList[0];
-  currentImageInt: number = 0;
+  public roomList: StoredData[] = []
+  currentHotelID: number = -1;
+  currentRoomID: number = 0;
+  currentHotelAndRoomID: number = 0;
+  currentRoom?: StoredData;
 
   tokenBookingKey: string = "BSRBookingToken";
 
   constructor(public userService: UserService, private router: Router, public databaseLocal: DatabaseLocal) { }
 
-  moveImage(amount: number) {
-    this.currentImageInt += amount;
-    if (this.currentImageInt < 0) {
-      this.currentImageInt = this.imageList.length - 1;
-    } else if (this.currentImageInt > this.imageList.length - 1) {
-      this.currentImageInt = 0;
+  // moveImage(amount: number) {
+  //   this.currentImageInt += amount;
+  //   if (this.currentImageInt < 0) {
+  //     this.currentImageInt = this.imageList.length - 1;
+  //   } else if (this.currentImageInt > this.imageList.length - 1) {
+  //     this.currentImageInt = 0;
+  //   }
+  //   this.currentImage = this.imageList[this.currentImageInt];
+  //   console.log(this.currentImageInt);
+  // }
+
+  changeHotel(amount: number) {
+    this.currentHotelInt += amount;
+    if (this.currentHotelInt < 0) {
+      this.currentHotelInt = this.databaseLocal.hotels.length - 1;
+    } else if (this.currentHotelInt > this.databaseLocal.hotels.length - 1) {
+      this.currentHotelInt = 0;
     }
-    this.currentImage = this.imageList[this.currentImageInt];
-    console.log(this.currentImageInt);
+    this.currentHotel = this.databaseLocal.hotels[this.currentHotelInt];
+
+    //get the list of possible rooms to choose
+    // this.restaurantTimes = this.databaseLocal.retrieveRestaurantTimes(this.currentRestaurantInt);
+
+    // this.selectedRestaurantType = -1;
+    // if (this.timeSelector !== undefined) {
+    //   this.timeSelector.options.forEach((data: MatOption) => data.deselect());
+    // }
+
+    this.chooseHotel(this.currentHotelInt);
+    this.chooseRoom(0);
   }
 
   today: Date = new Date();
@@ -109,21 +131,12 @@ export class HotelsComponent {
     }
   }
 
-  public roomList: StoredData[] = []
-  currentHotelID: number = -1;
-  currentRoomID: number = 0;
-  currentHotelAndRoomID: number = 0;
-  currentHotel?: StoredData;
-  currentRoom?: StoredData;
-
   chooseHotel(hotelID: number) {
     if (hotelID === this.currentHotelID) { return; }
     this.currentHotelID = hotelID;
     this.roomList = this.databaseLocal.retrieveHotelRooms(hotelID);
     this.chooseRoom(0);
   }
-
-
 
   chooseRoom(roomID: number) {
     this.currentRoomID = roomID;

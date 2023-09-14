@@ -1,37 +1,39 @@
 <app-header></app-header>
 
-<div *ngFor="let tripDay of tripDays">
-    <mat-card style="width: 400px; margin: 10px;">
-        {{tripDay.day!.toDateString()}}
-        <div *ngIf="tripDay.tickets.length>0">
-            <br>
-            Tickets:
-            <mat-card-content>
-                <!-- <div *ngFor="let ticket of tripDay.tickets">
+<div style="width: 100%;">
+    <div style="width: 400px; margin: auto;">
+        <mat-card *ngFor="let tripDay of tripDays" style="width: 400px; margin: 10px;">
+            {{tripDay.day!.toDateString()}}
+            <div *ngIf="tripDay.tickets.length>0">
+                <br>
+                Tickets:
+                <mat-card-content>
+                    <!-- <div *ngFor="let ticket of tripDay.tickets">
                     {{ticket.type}}
                 </div> -->
-                <div *ngFor="let ticketType of displayTickets(tripDay.tickets)">
-                    {{ticketType}}
-                </div>
-            </mat-card-content>
-        </div>
-        <div *ngIf="tripDay.bookings.length>0">
-            <br>
-            Hotel Booking:
-            <mat-card-content>
-                <div *ngFor="let bookingType of displayBookings(tripDay.bookings)">
-                    {{bookingType}}
-                </div>
-            </mat-card-content>
-        </div>
-        <div *ngIf="tripDay.reservations.length>0">
-            <br>
-            Reservations:
-            <mat-card-content>
-                <div *ngFor="let reservationType of displayReservations(tripDay.reservations)">
-                    {{reservationType}}
-                </div>
-            </mat-card-content>
-        </div>
-    </mat-card>
+                    <div *ngFor="let ticketType of displayTickets(tripDay.tickets)">
+                        {{ticketType}}
+                    </div>
+                </mat-card-content>
+            </div>
+            <div *ngIf="tripDay.bookings.length>0">
+                <br>
+                Hotel Booking:
+                <mat-card-content>
+                    <div *ngFor="let bookingType of displayBookings(tripDay.bookings)">
+                        {{bookingType}}
+                    </div>
+                </mat-card-content>
+            </div>
+            <div *ngIf="tripDay.reservations.length>0">
+                <br>
+                Reservations:
+                <mat-card-content>
+                    <div *ngFor="let reservationType of displayReservations(tripDay.reservations)">
+                        {{reservationType}}
+                    </div>
+                </mat-card-content>
+            </div>
+        </mat-card>
+    </div>
 </div>

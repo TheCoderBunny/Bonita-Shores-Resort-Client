@@ -1,0 +1,11 @@
+.roomButton {
+    width: 200px;
+    height: 200px;
+}
+
+.roomButton img{
+    width: 150px;
+    height: 100px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}

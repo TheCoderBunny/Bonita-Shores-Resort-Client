@@ -13,8 +13,12 @@ export class DatabaseLocal {
 
     public hotelTypes: StoredData[] = [];
     public hotels: StoredData[] = [
-        new StoredData("Hotel 01", "", 2),
-        new StoredData("Hotel 02", "", 2)
+        new StoredData("Hotel 01", 
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+         2),
+        new StoredData("Hotel 02", 
+        "https://images.unsplash.com/photo-1468824357306-a439d58ccb1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1959&q=80", 
+        4)
     ];
 
     public restaurantTimes: StoredData[] = [];
@@ -106,8 +110,10 @@ export class DatabaseLocal {
         this.hotelTypes[0] = new StoredData("Basic Room", "", 108.99)
         this.hotelTypes[1] = new StoredData("Nicer Room", "", 118.99)
         //hotel 2 is between 1000 - 1999
-        this.hotelTypes[1000] = new StoredData("Basic Room", "", 108.99)
-        this.hotelTypes[1001] = new StoredData("Nicer Room", "", 118.99)
+        this.hotelTypes[1000] = new StoredData("Basic Room 2", "/assets/RoomImages/Hotel01/Room01.avif", 128.99)
+        this.hotelTypes[1001] = new StoredData("Nicer Room 2", "/assets/RoomImages/Hotel01/Room02.avif", 138.99)
+        this.hotelTypes[1002] = new StoredData("Basic Room 3", "/assets/RoomImages/Hotel01/Room01.avif", 128.99)
+        this.hotelTypes[1003] = new StoredData("Nicer Room 4", "/assets/RoomImages/Hotel01/Room02.avif", 138.99)
 
         this.setHoursForRestaurant(0, 11, 22);
         this.setHoursForRestaurant(1, 11, 22);

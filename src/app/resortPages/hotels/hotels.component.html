@@ -1,11 +1,14 @@
 <app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
 <div class="img-holder">
-    <img class="adImage" src={{currentImage}}>
-    <button class="rightButton" mat-fab (click)="moveImage(1)"><mat-icon
+    <img class="adImage" src={{currentHotel.extra}}>
+    <button class="rightButton" mat-fab (click)="changeHotel(1)"><mat-icon
             class="icon-arrow">keyboard_arrow_right</mat-icon></button>
-    <button class="leftButton" mat-fab (click)="moveImage(-1)"><mat-icon
+    <button class="leftButton" mat-fab (click)="changeHotel(-1)"><mat-icon
             class="icon-arrow">keyboard_arrow_left</mat-icon></button>
+    <div class="title">
+        <h1 style="font-size: 3em; color: white;"><b>{{currentHotel.name}}</b></h1>
+    </div>
 </div>
 <br>
 
@@ -29,7 +32,7 @@
     <mat-grid-tile>
         <div class="expand-grid">
             <div style="text-align: center;">
-                <h1 style="display: inline;"><b>Book a Room</b></h1>
+                <h1 style="display: inline;"><b>Book a Room at {{currentHotel.name}}</b></h1>
             </div>
             <h4><b>Check-in - Check-out:</b></h4>
             <hr class="rounded">
@@ -55,7 +58,7 @@
             <div style="text-align: center;">
                 <h2><b>{{getDayDifference()}}</b></h2>
             </div>
-            <h4><b>Select Hotel:</b></h4>
+            <!-- <h4><b>Select Hotel:</b></h4>
             <hr class="rounded">
             <div *ngFor="let hotel of databaseLocal.hotels; let i = index">
                 <div *ngIf="i==currentHotelID; else notChosen">
@@ -67,20 +70,25 @@
             </div>
             <br>
             <br>
-            <br>
+            <br> -->
             <h4><b>Select Room:</b></h4>
             <hr class="rounded">
-            <div *ngFor="let room of this.roomList; let i = index">
-                <div *ngIf="i==currentRoomID; else notChosen">
-                    <button (click)="chooseRoom(i)" color="primary" mat-raised-button>{{room.name}}</button>
-                </div>
-                <ng-template #notChosen>
-                    <button (click)="chooseRoom(i)" mat-button>{{room.name}}</button>
-                </ng-template>
-            </div>
-            <br>
-            <br>
-            <br>
+            <mat-grid-list cols="2" rowHeight="200px">
+                <mat-grid-tile *ngFor="let room of this.roomList; let i = index">
+                    <div *ngIf="i==currentRoomID; else notChosen">
+                        <button class="roomButton" (click)="chooseRoom(i)" color="primary" mat-raised-button>
+                            <img src="{{room.extra}}">
+                            {{room.name}}
+                        </button>
+                    </div>
+                    <ng-template #notChosen>
+                        <button class="roomButton" (click)="chooseRoom(i)" mat-button>
+                            <img src="{{room.extra}}">
+                            {{room.name}}
+                        </button>
+                    </ng-template>
+                </mat-grid-tile>
+            </mat-grid-list>
             <hr class="rounded">
             <div style="height: 36px; text-align: center; width: 80%; margin: auto;" [hidden]="purchasing">
                 <button color="primary" (click)="purchasingClick();" mat-raised-button>Calculate Total</button>
