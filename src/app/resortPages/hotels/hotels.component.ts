@@ -25,6 +25,8 @@ export class HotelsComponent {
   currentHotelAndRoomID: number = 0;
   currentRoom?: StoredData;
 
+  rowHeight: number = 800;
+
   tokenBookingKey: string = "BSRBookingToken";
 
   constructor(public userService: UserService, private router: Router, public databaseLocal: DatabaseLocal) { }
@@ -135,7 +137,16 @@ export class HotelsComponent {
     if (hotelID === this.currentHotelID) { return; }
     this.currentHotelID = hotelID;
     this.roomList = this.databaseLocal.retrieveHotelRooms(hotelID);
+
+    this.rowHeight = 500 + 200 * Math.ceil(this.roomList.length/2);
+
     this.chooseRoom(0);
+
+    let adImage = <HTMLElement>document.getElementById("adImage");
+    adImage.classList.remove("adImageAnimate")
+    setTimeout(() => {
+      adImage.classList.add("adImageAnimate")
+    }, 0);
   }
 
   chooseRoom(roomID: number) {
@@ -167,7 +178,11 @@ export class HotelsComponent {
     this.purchasing = true;
     var checkoutButton = document.getElementById('checkout');
     if (checkoutButton) {
-      checkoutButton.scrollIntoView();
+      if (checkoutButton) {
+        setTimeout(() => {
+          checkoutButton!.scrollIntoView(false);
+        }, 0);
+      }
     }
   }
 

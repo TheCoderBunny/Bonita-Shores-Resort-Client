@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   currentImage: string = this.imageList[0];
   currentImageInt: number = 0;
 
-
   moveImage(amount: number) {
     this.currentImageInt+=amount;
     if (this.currentImageInt<0){
@@ -25,6 +24,12 @@ export class HomeComponent implements OnInit {
     }
     this.currentImage = this.imageList[this.currentImageInt];
     console.log(this.currentImageInt);
+
+    let adImage = <HTMLElement>document.getElementById("adImage");
+    adImage.classList.remove("adImageAnimate")
+    setTimeout(() => {
+      adImage.classList.add("adImageAnimate")
+    }, 0);
   }
 
   ngOnInit(): void {

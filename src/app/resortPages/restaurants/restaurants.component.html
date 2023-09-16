@@ -1,7 +1,7 @@
 <app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
 <div class="img-holder">
-    <img class="adImage" src={{currentRestaurant.extra}}>
+    <img class="adImage adImageAnimate" id="adImage" src={{currentRestaurant.extra}}>
     <button class="rightButton" mat-fab (click)="changeRestaurant(1)"><mat-icon
             class="icon-arrow">keyboard_arrow_right</mat-icon></button>
     <button class="leftButton" mat-fab (click)="changeRestaurant(-1)"><mat-icon
@@ -10,7 +10,7 @@
 </div>
 <br>
 
-<mat-grid-list cols="3" rowHeight="800px">
+<mat-grid-list cols="3" rowHeight="300px">
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
             <img class="smallAdImage"

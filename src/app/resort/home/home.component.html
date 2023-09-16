@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="img-holder">
-    <img class="adImage" src={{currentImage}}>
+    <img class="adImage adImageAnimate" id="adImage" src={{currentImage}}>
     <button class="rightButton" mat-fab (click)="moveImage(1)"><mat-icon
             class="icon-arrow">keyboard_arrow_right</mat-icon></button>
     <button class="leftButton" mat-fab (click)="moveImage(-1)"><mat-icon
@@ -8,7 +8,7 @@
 </div>
 <br>
 
-<mat-grid-list cols="3" rowHeight="600px">
+<mat-grid-list cols="3" rowHeight="800px">
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
             <img class="smallAdImage"
@@ -20,17 +20,35 @@
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
             <img class="smallAdImage"
-                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
             <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero.</div>
+            <br>
+            <hr class="rounded">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1468824357306-a439d58ccb1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1959&q=80">
+            <div class="smallAdText">
+                Id semper risus in hendrerit gravida. Eu tincidunt tortor aliquam nulla. Arcu vitae elementum curabitur
+                vitae nunc sed velit dignissim. Eget mauris pharetra et ultrices. Nibh praesent tristique magna sit. Mi
+                eget mauris pharetra et ultrices. Vulputate odio ut enim blandit volutpat maecenas volutpat. Elementum
+                nisi quis eleifend quam adipiscing vitae proin sagittis. Vitae semper quis lectus nulla at. Odio ut enim
+                blandit volutpat. Sem nulla pharetra diam sit amet nisl.
+            </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
-            <img class="smallAdImage"
-                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
-            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum.
+
+
+            <iframe width="90%" height="450" style="border:0; border-radius: 10px" loading="lazy" allowfullscreen
+                src="https://www.google.com/maps/embed/v1/view?zoom=15&center=26.3646%2C-81.8546&key=AIzaSyBYGjQXIxqUgiy0ef5JbWgr1SVnAqS41x4"></iframe>
+            <h1><b>Located on Bay's Island!</b></h1>
+            <div class="smallAdText">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
             </div>
         </div>
     </mat-grid-tile>

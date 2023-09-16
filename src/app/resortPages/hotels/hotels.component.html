@@ -1,7 +1,7 @@
 <app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
 <div class="img-holder">
-    <img class="adImage" src={{currentHotel.extra}}>
+    <img class="adImage adImageAnimate" id="adImage" src={{currentHotel.extra}}>
     <button class="rightButton" mat-fab (click)="changeHotel(1)"><mat-icon
             class="icon-arrow">keyboard_arrow_right</mat-icon></button>
     <button class="leftButton" mat-fab (click)="changeHotel(-1)"><mat-icon
@@ -12,7 +12,7 @@
 </div>
 <br>
 
-<mat-grid-list cols="3" rowHeight="800px">
+<mat-grid-list cols="3" rowHeight="{{rowHeight}}">
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
             <img class="smallAdImage"
@@ -77,14 +77,20 @@
                 <mat-grid-tile *ngFor="let room of this.roomList; let i = index">
                     <div *ngIf="i==currentRoomID; else notChosen">
                         <button class="roomButton" (click)="chooseRoom(i)" color="primary" mat-raised-button>
+                            <h2>{{room.name}}</h2>
                             <img src="{{room.extra}}">
-                            {{room.name}}
+                            <b>${{room.count}}</b>
+                            <br>
+                            <h6>Avg/Night Excl Tax</h6>
                         </button>
                     </div>
                     <ng-template #notChosen>
                         <button class="roomButton" (click)="chooseRoom(i)" mat-button>
+                            <h2>{{room.name}}</h2>
                             <img src="{{room.extra}}">
-                            {{room.name}}
+                            <b>${{room.count}}</b>
+                            <br>
+                            <h6>Avg/Night Excl Tax</h6>
                         </button>
                     </ng-template>
                 </mat-grid-tile>

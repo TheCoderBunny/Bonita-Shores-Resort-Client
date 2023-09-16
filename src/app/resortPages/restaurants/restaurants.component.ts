@@ -40,6 +40,12 @@ export class RestaurantsComponent {
     if (this.timeSelector !== undefined) {
       this.timeSelector.options.forEach((data: MatOption) => data.deselect());
     }
+
+    let adImage = <HTMLElement>document.getElementById("adImage");
+    adImage.classList.remove("adImageAnimate")
+    setTimeout(() => {
+      adImage.classList.add("adImageAnimate")
+    }, 0);
   }
 
 

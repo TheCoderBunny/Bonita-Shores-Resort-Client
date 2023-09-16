@@ -31,7 +31,21 @@ body {
     height: 500px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    object-position: 0% 50%;
 }
+
+.adImageAnimate {
+    animation: 3s alternate slideAdImage;
+}
+
+@keyframes slideAdImage {
+    from {
+        object-position: 0% 30%;
+    }
+    to {
+        object-position: 0% 50%;
+    }
+  }
 
 .smallAdImage {
     width: 90%;
@@ -47,6 +61,10 @@ body {
     width: 90%;
     text-align: center;
     margin: auto;
+}
+
+.info-box{
+    height: 120px;
 }
 
 .img-holder {
@@ -67,16 +85,16 @@ body {
     /*your button position*/
 }
 
-.img-holder .title{
+.img-holder .title {
     position: absolute;
     left: 0px;
     bottom: 5px;
     width: 100%;
     height: 60px;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-.img-holder .title h1{
+.img-holder .title h1 {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 50%);
@@ -97,6 +115,7 @@ body {
 hr.rounded {
     border-top: 2px solid #bbb;
     border-radius: 5px;
+    width: 90%;
 }
 
 .expand-grid {

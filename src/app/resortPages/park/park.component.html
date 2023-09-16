@@ -1,7 +1,7 @@
 <app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
 <div class="img-holder">
-    <img class="adImage" src={{currentImage}}>
+    <img class="adImage adImageAnimate" id="adImage" src={{currentImage}}>
     <button class="rightButton" mat-fab (click)="moveImage(1)"><mat-icon
             class="icon-arrow">keyboard_arrow_right</mat-icon></button>
     <button class="leftButton" mat-fab (click)="moveImage(-1)"><mat-icon
@@ -9,21 +9,73 @@
 </div>
 <br>
 
-<mat-grid-list cols="3" rowHeight="600px">
+<mat-grid-list cols="3" rowHeight="1200px">
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
             <img class="smallAdImage"
-                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
-            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Nec dui nunc mattis enim ut tellus.</div>
+                src="https://images.unsplash.com/photo-1638450096618-7774f1cdb5d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+            <div class="info-box">
+                <div class="smallAdText">
+                    <h2>Dolore Magna Aliqua</h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor
+                    incididunt ut labore et dolore magna aliqua. Nec dui nunc mattis enim ut tellus.
+                </div>
+            </div>
+            <hr class="rounded">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1542332606-b2d1c52a6c33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+            <div class="info-box">
+                <div class="smallAdText">
+                    <h2>Nulla Aliquet</h2>
+                    Dictumst vestibulum rhoncus est pellentesque. Varius duis at consectetur lorem
+                    donec massa. Nulla aliquet enim tortor at. Est pellentesque elit ullamcorper dignissim cras
+                    tincidunt
+                    lobortis feugiat.
+                </div>
+            </div>
+            <hr class="rounded">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1570444952548-756e3fc089fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+            <div class="info-box">
+                <div class="smallAdText">
+                    <h2>Integer Feugiat</h2>Consequat semper viverra nam libero justo laoreet sit amet. Vitae proin
+                    sagittis nisl rhoncus. Integer feugiat scelerisque varius morbi. Enim ut sem viverra aliquet eget.
+                </div>
+            </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
             <img class="smallAdImage"
-                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
-            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero.</div>
+                src="https://images.unsplash.com/photo-1546699718-5871c27b4197?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80">
+            <div class="info-box">
+                <div class="smallAdText">
+                    <h2>Consequat Nisl</h2>Vitae auctor eu augue ut lectus arcu bibendum at. Fermentum iaculis eu non
+                    diam
+                    phasellus vestibulum lorem sed risus. Consequat nisl vel pretium lectus quam. Facilisis sed odio
+                    morbi
+                    quis commodo odio aenean sed.
+                </div>
+            </div>
+            <hr class="rounded">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1586864101969-d7564be25804?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fHdhdGVyJTIwcGFya3xlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60">
+            <div class="info-box">
+                <div class="smallAdText">
+                    <h2>Tincidunt Ornare</h2>Dignissim cras tincidunt lobortis feugiat vivamus. Gravida arcu ac tortor
+                    dignissim convallis aenean et tortor. Tincidunt ornare massa eget egestas purus viverra accumsan in.
+                    Nisl purus in mollis nunc sed id semper risus in.
+                </div>
+            </div>
+            <hr class="rounded">
+            <img class="smallAdImage"
+                src="https://images.unsplash.com/photo-1597500320466-481a4518343b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
+            <div class="info-box">
+                <div class="smallAdText">
+                    <h2>Vitae Proin Sagittis</h2>Pellentesque habitant morbi tristique senectus. Massa ultricies mi quis
+                    hendrerit dolor magna. Vitae proin sagittis nisl rhoncus. Interdum consectetur libero id faucibus.
+                </div>
+            </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
@@ -69,25 +121,21 @@
             <h4><b>Select Guests:</b></h4>
             <hr class="rounded">
             <div style="height: 36px; text-align: center; width: 80%; margin: auto;">
-                <button (click)="adjustAdultTicketCount(-1);" class="element-left-side" mat-mini-fab
-                    color="secondary">
+                <button (click)="adjustAdultTicketCount(-1);" class="element-left-side" mat-mini-fab color="secondary">
                     <mat-icon>remove</mat-icon>
                 </button>
                 <h3 style="display: inline; padding: 20px;">{{getAdultTicketCount()}}</h3>
-                <button (click)="adjustAdultTicketCount(1);" class="element-right-side" mat-mini-fab
-                    color="secondary">
+                <button (click)="adjustAdultTicketCount(1);" class="element-right-side" mat-mini-fab color="secondary">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
             <br>
             <div style="height: 36px; text-align: center; width: 80%; margin: auto;">
-                <button (click)="adjustChildTicketCount(-1);" class="element-left-side" mat-mini-fab
-                    color="secondary">
+                <button (click)="adjustChildTicketCount(-1);" class="element-left-side" mat-mini-fab color="secondary">
                     <mat-icon>remove</mat-icon>
                 </button>
                 <h3 style="display: inline; padding: 20px;">{{getChildTicketCount()}}</h3>
-                <button (click)="adjustChildTicketCount(1);" class="element-right-side" mat-mini-fab
-                    color="secondary">
+                <button (click)="adjustChildTicketCount(1);" class="element-right-side" mat-mini-fab color="secondary">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
@@ -98,17 +146,22 @@
             </div>
             <div [hidden]="!purchasing">
                 <h4><b>Order Summary:</b></h4>
-                <h4 class="element-inline element-left-side">Subtotal: ({{getTicketCount()}})</h4><h4 class="element-right-side element-inline">{{getTicketCost()}}</h4>
+                <h4 class="element-inline element-left-side">Subtotal: ({{getTicketCount()}})</h4>
+                <h4 class="element-right-side element-inline">{{getTicketCost()}}</h4>
                 <br>
                 <br>
-                <h4 class="element-inline element-left-side">Taxes:</h4><h4 class="element-right-side element-inline">{{getTaxes()}}</h4>
+                <h4 class="element-inline element-left-side">Taxes:</h4>
+                <h4 class="element-right-side element-inline">{{getTaxes()}}</h4>
                 <br>
                 <br>
-                <h4 class="element-inline element-left-side">Total:</h4><h4 class="element-right-side element-inline">{{getTicketTotal()}}</h4>
+                <h4 class="element-inline element-left-side">Total:</h4>
+                <h4 class="element-right-side element-inline">{{getTicketTotal()}}</h4>
                 <br>
                 <br>
-                <button [hidden]="!this.userService.loggedIn" color="primary" (click)="checkout();" (click)="purchasing=true;" mat-raised-button>Checkout</button>
-                <sign-in-popup [hidden]="this.userService.loggedIn" style="text-align: center;" [raised]="true" buttonName="Sign-In or Register to Checkout" color="primary"></sign-in-popup>
+                <button [hidden]="!this.userService.loggedIn" color="primary" (click)="checkout();"
+                    (click)="purchasing=true;" mat-raised-button>Checkout</button>
+                <sign-in-popup [hidden]="this.userService.loggedIn" style="text-align: center;" [raised]="true"
+                    buttonName="Sign-In or Register to Checkout" color="primary"></sign-in-popup>
             </div>
             <div id="checkout"></div>
         </div>
