@@ -116,7 +116,7 @@ export class RestaurantsComponent {
     if (reply === null) { return; }
     reply.subscribe((response: any) => {
       this.loading.toggle(true, "Completed");
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/trip');
     }, error => {
       console.log('Error: ', error);
       window.alert('Unsuccessful Reservation');

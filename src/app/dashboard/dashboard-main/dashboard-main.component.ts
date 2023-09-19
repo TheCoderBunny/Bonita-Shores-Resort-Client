@@ -41,6 +41,7 @@ export class DashboardMainComponent implements OnInit {
     }
 
     var today: Date = new Date();
+    today = new Date(today.getFullYear(), today.getMonth(), today.getDate())
 
     this.userService.getTripFutureFromDay(today).subscribe((response: any) => {
 
@@ -50,7 +51,7 @@ export class DashboardMainComponent implements OnInit {
         for (var ticket of this.trip.tickets) {
           this.tripPlanned = true;
           var day: Date = new Date(ticket.day!)
-          var dayNumber = Math.floor(day.getTime() / this.oneDay) - Math.floor(today.getTime() / this.oneDay) + 1;
+          var dayNumber = Math.floor(day.getTime() / this.oneDay) - Math.floor(today.getTime() / this.oneDay);
           if (this.tripDays[dayNumber] === undefined) {//if this day isn't listed make a new day and add the ticket
             var tripDay: Trip = new Trip();
             tripDay.day = new Date(today.getFullYear(), today.getMonth(), today.getDate() + dayNumber)
@@ -66,7 +67,7 @@ export class DashboardMainComponent implements OnInit {
         for (var booking of this.trip.bookings) {
           this.tripPlanned = true;
           var day: Date = new Date(booking.day!)
-          var dayNumber = Math.floor(day.getTime() / this.oneDay) - Math.floor(today.getTime() / this.oneDay) + 1;
+          var dayNumber = Math.floor(day.getTime() / this.oneDay) - Math.floor(today.getTime() / this.oneDay);
           if (this.tripDays[dayNumber] === undefined) {//if this day isn't listed make a new day and add the booking
             var tripDay: Trip = new Trip();
             tripDay.day = new Date(today.getFullYear(), today.getMonth(), today.getDate() + dayNumber)
@@ -82,7 +83,7 @@ export class DashboardMainComponent implements OnInit {
         for (var reservation of this.trip.reservations) {
           this.tripPlanned = true;
           var day: Date = new Date(reservation.day!)
-          var dayNumber = Math.floor(day.getTime() / this.oneDay) - Math.floor(today.getTime() / this.oneDay) + 1;
+          var dayNumber = Math.floor(day.getTime() / this.oneDay) - Math.floor(today.getTime() / this.oneDay);
           if (this.tripDays[dayNumber] === undefined) {//if this day isn't listed make a new day and add the reservation
             var tripDay: Trip = new Trip();
             tripDay.day = new Date(today.getFullYear(), today.getMonth(), today.getDate() + dayNumber)
@@ -93,6 +94,8 @@ export class DashboardMainComponent implements OnInit {
           }
         }
       }
+
+      //this.tripPlanned=false; //tester
 
       //fill in the empty days
       var fillTo: number = this.tripDays.length;
@@ -152,7 +155,7 @@ export class DashboardMainComponent implements OnInit {
       if (count[i] !== undefined) {
         if (count[i] > 0) {
           var hotelAndRoom = this.databaseLocal.getHotelAndRoomFromTypeID(i);
-          strings.push(count[i] + "x " + hotelAndRoom.room.name + " at " + hotelAndRoom.hotel.name);
+          strings.push(count[i] + "x " + hotelAndRoom.room.name + " Room at " + hotelAndRoom.hotel.name);
         }
       }
     }

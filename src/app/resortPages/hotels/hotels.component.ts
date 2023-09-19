@@ -242,7 +242,7 @@ export class HotelsComponent {
       this.loading.toggle(true, "Completed");
       localStorage.removeItem(this.tokenBookingKey + "StartDate");
       localStorage.removeItem(this.tokenBookingKey + "EndDate");
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/trip');
     }, error => {
       console.log('Error: ', error);
       window.alert('Unsuccessful Purchase');

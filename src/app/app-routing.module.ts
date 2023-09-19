@@ -22,7 +22,7 @@ const routes: Routes = [
     component: SignUpComponent
   },
   {
-    path: "dashboard",
+    path: "trip",
     component: DashboardMainComponent
   },
   {
@@ -34,7 +34,7 @@ const routes: Routes = [
     component: HotelsComponent
   },
   {
-    path: "restaurants",
+    path: "dining",
     component: RestaurantsComponent
   }
 ];

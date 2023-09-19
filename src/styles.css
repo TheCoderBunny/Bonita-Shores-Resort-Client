@@ -42,10 +42,11 @@ body {
     from {
         object-position: 0% 30%;
     }
+
     to {
         object-position: 0% 50%;
     }
-  }
+}
 
 .smallAdImage {
     width: 90%;
@@ -63,7 +64,7 @@ body {
     margin: auto;
 }
 
-.info-box{
+.info-box {
     min-height: 120px;
 }
 
@@ -137,8 +138,52 @@ hr.rounded {
     display: inline;
 }
 
-.empty-text{
+.empty-text {
     color: rgb(190, 190, 190);
+}
+
+.image-grid-fill {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.image-ocean {
+    width: 100%;
+    height: 1000px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    z-index: -10;
+    background-image: url("https://images.unsplash.com/photo-1501696461415-6bd6660c6742?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80");
+    background-position: 0% 100%;
+    position: absolute;
+}
+
+.image-ocean .cover {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), rgb(255, 255, 255));
+}
+
+/* .shadow-bottom {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0, .2));
+    position: absolute;
+} */
+
+.shadow-top {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgb(0, 0, 0, 0));
+    position: absolute;
+    height: 5px;
+    width: 100%;
+    z-index: 10;
+}
+
+.shine {
+    background-image: linear-gradient(to bottom, rgba(192, 34, 240, 0.4), rgb(0, 0, 0, 0));
+    position: absolute;
+    height: 60px;
+    width: 100%;
 }
 
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";

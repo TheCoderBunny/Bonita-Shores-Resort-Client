@@ -20,7 +20,7 @@ export class UserService {
   public goToHomeOnLogout: boolean = false;
 
   correctLoggedOutRoute() {
-    if (this.router.url === '/dashboard') {//possibly update this in the future to a table of urls that should navigate to home on logout.
+    if (this.router.url === '/trip') {//possibly update this in the future to a table of urls that should navigate to home on logout.
       this.router.navigateByUrl('/home');
     }
   }

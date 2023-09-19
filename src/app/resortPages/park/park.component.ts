@@ -261,7 +261,7 @@ export class ParkComponent implements OnInit {
       localStorage.removeItem(this.tokenTicketsKey + "EndDate");
       localStorage.removeItem(this.tokenTicketsKey + "AdultTicketCount");
       localStorage.removeItem(this.tokenTicketsKey + "ChildTicketCount");
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/trip');
     }, error => {
       console.log('Error: ', error);
       window.alert('Unsuccessful Purchase');

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  buttonList: string[] = ["Park","Hotels","Restaurants"];
+  buttonList: string[] = ["Park","Hotels","Dining"];
 
   ngOnInit(): void {
     
