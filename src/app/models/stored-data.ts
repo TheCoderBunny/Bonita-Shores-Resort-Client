@@ -7,5 +7,6 @@ export class StoredData {
         this.name = name;
         this.extra = extra;
         this.count = count;
+        this.details = details;
     }
 }

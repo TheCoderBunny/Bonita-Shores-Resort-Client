@@ -48,6 +48,24 @@ export class RestaurantsComponent {
     }, 0);
   }
 
+  changeRestaurantDirect(restaurantID: number) {
+    this.currentRestaurantInt = restaurantID;
+    this.currentRestaurant = this.databaseLocal.restaurants[this.currentRestaurantInt];
+
+    this.restaurantTimes = this.databaseLocal.retrieveRestaurantTimes(this.currentRestaurantInt);
+
+    this.selectedRestaurantType = -1;
+    if (this.timeSelector !== undefined) {
+      this.timeSelector.options.forEach((data: MatOption) => data.deselect());
+    }
+
+    let adImage = <HTMLElement>document.getElementById("adImage");
+    adImage.classList.remove("adImageAnimate")
+    setTimeout(() => {
+      adImage.classList.add("adImageAnimate")
+    }, 0);
+  }
+
 
   today: Date = new Date();
   endDateMax: Date = new Date();

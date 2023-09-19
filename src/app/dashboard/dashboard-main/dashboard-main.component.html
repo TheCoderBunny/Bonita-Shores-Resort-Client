@@ -1,39 +1,62 @@
+<app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
 
-<div style="width: 100%;">
-    <div style="width: 400px; margin: auto;">
-        <mat-card *ngFor="let tripDay of tripDays" style="width: 400px; margin: 10px;">
-            {{tripDay.day!.toDateString()}}
-            <div *ngIf="tripDay.tickets.length>0">
-                <br>
-                Tickets:
-                <mat-card-content>
-                    <!-- <div *ngFor="let ticket of tripDay.tickets">
-                    {{ticket.type}}
-                </div> -->
-                    <div *ngFor="let ticketType of displayTickets(tripDay.tickets)">
-                        {{ticketType}}
-                    </div>
-                </mat-card-content>
+<h1>Your Trip Information</h1>
+
+<div *ngIf="tripPlanned; else noTrip" style="width: 100%;">
+    <mat-card class="day-card" *ngFor="let tripDay of tripDays">
+        <div
+            *ngIf="!isDayEmpty(tripDay); else emptyDay">
+            <div class="day">
+                <h1><b>{{tripDay.day!.toDateString()}}</b></h1>
             </div>
-            <div *ngIf="tripDay.bookings.length>0">
-                <br>
-                Hotel Booking:
-                <mat-card-content>
-                    <div *ngFor="let bookingType of displayBookings(tripDay.bookings)">
-                        {{bookingType}}
+            <hr class="rounded">
+            <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="expand-grid main" *ngIf="tripDay.tickets.length>0;else emptyTickets">
+                        <h3><b>Park Tickets:</b></h3>
+                        <div *ngFor="let ticketType of displayTickets(tripDay.tickets)">
+                            {{ticketType}}
+                        </div>
                     </div>
-                </mat-card-content>
-            </div>
-            <div *ngIf="tripDay.reservations.length>0">
-                <br>
-                Reservations:
-                <mat-card-content>
-                    <div *ngFor="let reservationType of displayReservations(tripDay.reservations)">
-                        {{reservationType}}
+                    <ng-template #emptyTickets>
+                        <div class="expand-grid main empty-text"><h3><b>Park Tickets:</b></h3></div>
+                    </ng-template>
+                </mat-grid-tile>
+                <mat-grid-tile class="main">
+                    <div class="expand-grid main" *ngIf="tripDay.bookings.length>0; else emptyBookings">
+                        <h3><b>Hotel Rooms:</b></h3>
+                        <div *ngFor="let bookingType of displayBookings(tripDay.bookings)">
+                            {{bookingType}}
+                        </div>
                     </div>
-                </mat-card-content>
+                    <ng-template #emptyBookings>
+                        <div class="expand-grid main empty-text"><h3><b>Hotel Rooms:</b></h3></div>
+                    </ng-template>
+                </mat-grid-tile>
+                <mat-grid-tile class="main">
+                    <div class="expand-grid main" *ngIf="tripDay.reservations.length>0; else emptyReservations">
+                        <h3><b>Dining Reservations:</b></h3>
+                        <div *ngFor="let reservationType of displayReservations(tripDay.reservations)">
+                            {{reservationType}}
+                        </div>
+                    </div>
+                    <ng-template #emptyReservations>
+                        <div class="expand-grid main empty-text"><h3><b>Dining Reservations:</b></h3></div>
+                    </ng-template>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <br>
+        </div>
+        <ng-template #emptyDay>
+            <div class="day empty-text">
+                <h4 class="element-inline">{{tripDay.day!.toDateString()}}</h4>
             </div>
-        </mat-card>
-    </div>
+        </ng-template>
+    </mat-card>
 </div>
+<ng-template #noTrip>
+    no trip
+</ng-template>
+<br>
+<app-footer></app-footer>

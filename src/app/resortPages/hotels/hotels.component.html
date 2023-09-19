@@ -15,25 +15,32 @@
 <mat-grid-list cols="3" rowHeight="{{rowHeight}}">
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
-            <img class="smallAdImage"
-                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
-            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Nec dui nunc mattis enim ut tellus.</div>
+            <img (click)="changeHotelDirect(0)" class="smallAdImage"
+                src="{{databaseLocal.hotels[0].extra}}">
+            <div mat-fab class="info-box">
+                <div class="smallAdText">
+                    <h2 (click)="changeHotelDirect(0)">{{databaseLocal.hotels[0].name}}</h2>{{databaseLocal.hotels[0].details![0]}}
+                </div>
+            </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
-            <img class="smallAdImage"
-                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
-            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero.</div>
+            <img (click)="changeHotelDirect(1)" class="smallAdImage"
+                src="{{databaseLocal.hotels[1].extra}}">
+            <div class="info-box">
+                <div class="smallAdText">
+                    <h2 (click)="changeHotelDirect(1)">{{databaseLocal.hotels[1].name}}</h2>{{databaseLocal.hotels[1].details![0]}}
+                </div>
+            </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="expand-grid">
             <div style="text-align: center;">
-                <h1 style="display: inline;"><b>Book a Room at {{currentHotel.name}}</b></h1>
+                <h1 style="display: inline;"><b>Book a Room for<br>{{currentHotel.name}}</b></h1>
             </div>
+            <br>
             <h4><b>Check-in - Check-out:</b></h4>
             <hr class="rounded">
             <div style="height: 36px; text-align: center;">
@@ -122,3 +129,4 @@
         </div>
     </mat-grid-tile>
 </mat-grid-list>
+<app-footer></app-footer>

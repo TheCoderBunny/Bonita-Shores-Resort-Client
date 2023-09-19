@@ -10,26 +10,34 @@
 </div>
 <br>
 
-<mat-grid-list cols="3" rowHeight="300px">
+<mat-grid-list cols="3" rowHeight="500px">
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
-            <img class="smallAdImage"
-                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
-            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Nec dui nunc mattis enim ut tellus.</div>
+            <img (click)="changeRestaurantDirect(0)"  class="smallAdImage"
+                src="{{databaseLocal.restaurants[0].extra}}">
+            <div mat-fab class="info-box">
+                <div class="smallAdText">
+                    <h2 (click)="changeRestaurantDirect(0)" >{{databaseLocal.restaurants[0].name}}</h2>{{databaseLocal.restaurants[0].details![0]}}
+                </div>
+            </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
-            <img class="smallAdImage"
-                src="https://images.unsplash.com/photo-1465996140498-df84be101126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80">
-            <div class="smallAdText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero.</div>
+            <img (click)="changeRestaurantDirect(1)"  class="smallAdImage"
+                src="{{databaseLocal.restaurants[1].extra}}">
+            <div mat-fab class="info-box">
+                <div class="smallAdText">
+                    <h2 (click)="changeRestaurantDirect(1)" >{{databaseLocal.restaurants[1].name}}</h2>{{databaseLocal.restaurants[1].details![0]}}
+                </div>
+            </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="expand-grid">
-            <h4><b>Reserve Date & Time for {{currentRestaurant.name}}:</b></h4>
+            <div style="text-align: center;">
+                <h1 style="display: inline;"><b>Reserve Date & Time for<br>{{currentRestaurant.name}}</b></h1>
+            </div>
             <hr class="rounded">
             <div style="height: 40px; text-align: center;">
                 <button style="width: 212px;" mat-stroked-button [matMenuTriggerFor]="menuStartDate"
@@ -62,3 +70,4 @@
         </div>
     </mat-grid-tile>
 </mat-grid-list>
+<app-footer></app-footer>

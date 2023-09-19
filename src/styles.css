@@ -64,7 +64,7 @@ body {
 }
 
 .info-box{
-    height: 120px;
+    min-height: 120px;
 }
 
 .img-holder {
@@ -135,6 +135,10 @@ hr.rounded {
 
 .element-inline {
     display: inline;
+}
+
+.empty-text{
+    color: rgb(190, 190, 190);
 }
 
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";

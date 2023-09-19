@@ -31,17 +31,6 @@ export class HotelsComponent {
 
   constructor(public userService: UserService, private router: Router, public databaseLocal: DatabaseLocal) { }
 
-  // moveImage(amount: number) {
-  //   this.currentImageInt += amount;
-  //   if (this.currentImageInt < 0) {
-  //     this.currentImageInt = this.imageList.length - 1;
-  //   } else if (this.currentImageInt > this.imageList.length - 1) {
-  //     this.currentImageInt = 0;
-  //   }
-  //   this.currentImage = this.imageList[this.currentImageInt];
-  //   console.log(this.currentImageInt);
-  // }
-
   changeHotel(amount: number) {
     this.currentHotelInt += amount;
     if (this.currentHotelInt < 0) {
@@ -51,13 +40,13 @@ export class HotelsComponent {
     }
     this.currentHotel = this.databaseLocal.hotels[this.currentHotelInt];
 
-    //get the list of possible rooms to choose
-    // this.restaurantTimes = this.databaseLocal.retrieveRestaurantTimes(this.currentRestaurantInt);
+    this.chooseHotel(this.currentHotelInt);
+    this.chooseRoom(0);
+  }
 
-    // this.selectedRestaurantType = -1;
-    // if (this.timeSelector !== undefined) {
-    //   this.timeSelector.options.forEach((data: MatOption) => data.deselect());
-    // }
+  changeHotelDirect(hotelID: number) {
+    this.currentHotelInt = hotelID;
+    this.currentHotel = this.databaseLocal.hotels[this.currentHotelInt];
 
     this.chooseHotel(this.currentHotelInt);
     this.chooseRoom(0);
@@ -166,6 +155,11 @@ export class HotelsComponent {
     if (localStorage.getItem(this.tokenBookingKey + "StartDate") != null) {
       this.startDate = new Date(localStorage.getItem(this.tokenBookingKey + "StartDate") || this.startDate.toDateString());
       this.endDate = new Date(localStorage.getItem(this.tokenBookingKey + "EndDate") || this.endDate.toDateString());
+
+      if(this.startDate<this.today){
+        this.startDate=new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+        this.endDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1);
+      }
     }
 
     this.chooseHotel(0);

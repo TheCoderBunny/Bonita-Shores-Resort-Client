@@ -1,0 +1,22 @@
+.day-card{
+    background-color: white;
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    /* text-align: center; */
+}
+
+.day-card .day{
+    /* background-color: burlywood; */
+    border-radius: 10px;
+    width: 96.6666%;
+    margin: auto;
+}
+
+.day-card .main{
+    /* background-color: brown; */
+    border-radius: 10px;
+    width: 90%;
+    margin: auto;
+    text-align: left;
+}

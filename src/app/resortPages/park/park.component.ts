@@ -56,13 +56,18 @@ export class ParkComponent implements OnInit {
   ngOnInit(): void {
     this.endDateMax = new Date(this.today.getFullYear() + 1, this.today.getMonth(), this.today.getDate() - 1);
     this.startDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
-    this.endDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+    this.endDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 2);
 
     if (localStorage.getItem(this.tokenTicketsKey + "StartDate") != null) {
       this.startDate = new Date(localStorage.getItem(this.tokenTicketsKey + "StartDate") || this.startDate.toDateString());
       this.endDate = new Date(localStorage.getItem(this.tokenTicketsKey + "EndDate") || this.endDate.toDateString());
       this.adultTicketCount = Number(localStorage.getItem(this.tokenTicketsKey + "AdultTicketCount")) || 1;
       this.childTicketCount = Number(localStorage.getItem(this.tokenTicketsKey + "ChildTicketCount")) || 0;
+
+      if(this.startDate<this.today){
+        this.startDate=new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+        this.endDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 2);
+      }
     }
   }
 
