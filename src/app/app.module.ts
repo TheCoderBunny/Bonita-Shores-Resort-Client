@@ -7,7 +7,7 @@ import { SignUpComponent } from './general/sign-up/sign-up.component';
 import { HomeComponent } from './resort/home/home.component';
 
 import { HttpClientModule } from '@angular/common/http'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInPopupComponent } from './general/sign-in-popup/sign-in-popup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -65,7 +65,8 @@ import { FooterComponent } from './general/footer/footer.component';
     MatNativeDateModule,
     MatRippleModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

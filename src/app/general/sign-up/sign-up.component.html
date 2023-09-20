@@ -1,45 +1,53 @@
 <app-header></app-header>
-<!-- <form (ngSubmit)="signUp()">
-  <h1>REGISTER</h1>
-  <span>First Name </span>
-  <input placeholder="Enter First Name" type="text" name="firstName" [(ngModel)]="newUser.firstName"><br><br>
-  <span>Last Name </span>
-  <input placeholder="Enter Last Name" type="text" name="lastName" [(ngModel)]="newUser.lastName"><br><br>
-  <span>Email </span>
-  <input placeholder="Enter Email" type="text" name="email" [(ngModel)]="newUser.email"><br><br>
-  <span>Password </span>
-  <input placeholder="Enter Password" type="text" name="password" [(ngModel)]="newUser.password"><br><br>
 
-  <button>
-    Sign Up
-  </button>
-</form> -->
-<br>
-<div class="signup">
-<form (ngSubmit)="signUp()">
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput type="text" name="email" [(ngModel)]="newUser.email">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput type="password" name="password" [(ngModel)]="newUser.password">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>First Name</mat-label>
-    <input matInput type="text" name="firstName" [(ngModel)]="newUser.firstName">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Last Name</mat-label>
-    <input matInput type="text" name="lastName" [(ngModel)]="newUser.lastName">
-  </mat-form-field>
-  <br>
-  <span class="menu-form">
-    <button mat-raised-button>Register</button>
-  </span>
+<div style="min-height: 100%;">
 
-</form>
+  <div class="image-ocean">
+    <div class="cover">
+      <div class="background">
+
+      </div>
+      <div class="background-end">
+      </div>
+    </div>
+  </div>
+  <div class="info-section">
+    <br>
+    <br>
+    <h1><b>Create an account and join the fun!</b></h1>
+    <br>
 </div>
+
+  <br>
+  <div class="signup">
+    <form (ngSubmit)="signUp()">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="name@example.com" type="text" name="email" [(ngModel)]="newUser.email" [formControl]="emailFormControl" required>
+        <mat-error *ngIf="emailFormControl.invalid">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" name="password" [(ngModel)]="newUser.password" [formControl]="passwordFormControl" required>
+        <mat-error *ngIf="passwordFormControl.invalid">{{getPasswordErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" name="firstName" [(ngModel)]="newUser.firstName" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" name="lastName" [(ngModel)]="newUser.lastName" required>
+      </mat-form-field>
+      <br>
+      <span class="menu-form">
+        <button mat-raised-button>Register</button>
+      </span>
+
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

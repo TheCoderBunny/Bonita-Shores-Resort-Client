@@ -1,34 +1,43 @@
 <app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
+
+<div class="image-ocean">
+    <div class="cover">
+
+    </div>
+</div>
+
 <div class="img-holder">
     <img class="adImage adImageAnimate" id="adImage" src={{currentRestaurant.extra}}>
     <button class="rightButton" mat-fab (click)="changeRestaurant(1)"><mat-icon
             class="icon-arrow">keyboard_arrow_right</mat-icon></button>
     <button class="leftButton" mat-fab (click)="changeRestaurant(-1)"><mat-icon
             class="icon-arrow">keyboard_arrow_left</mat-icon></button>
-    <div class="title"><h1 style="font-size: 3em; color: white;"><b>{{currentRestaurant.name}}</b></h1></div>
+    <div class="title">
+        <h1 style="font-size: 3em; color: white;"><b>{{currentRestaurant.name}}</b></h1>
+    </div>
 </div>
 <br>
 
 <mat-grid-list cols="3" rowHeight="500px">
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
-            <img (click)="changeRestaurantDirect(0)" class="smallAdImage"
-                src="{{databaseLocal.restaurants[0].extra}}">
+            <img (click)="changeRestaurantDirect(0)" class="smallAdImage" src="{{databaseLocal.restaurants[0].extra}}">
             <div mat-fab class="info-box">
                 <div class="smallAdText">
-                    <h2 (click)="changeRestaurantDirect(0)" >{{databaseLocal.restaurants[0].name}}</h2>{{databaseLocal.restaurants[0].details![0]}}
+                    <h2 (click)="changeRestaurantDirect(0)">{{databaseLocal.restaurants[0].name}}</h2>
+                    {{databaseLocal.restaurants[0].details![0]}}
                 </div>
             </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="expand-grid" style="text-align: center;">
-            <img (click)="changeRestaurantDirect(1)"  class="smallAdImage"
-                src="{{databaseLocal.restaurants[1].extra}}">
+            <img (click)="changeRestaurantDirect(1)" class="smallAdImage" src="{{databaseLocal.restaurants[1].extra}}">
             <div mat-fab class="info-box">
                 <div class="smallAdText">
-                    <h2 (click)="changeRestaurantDirect(1)" >{{databaseLocal.restaurants[1].name}}</h2>{{databaseLocal.restaurants[1].details![0]}}
+                    <h2 (click)="changeRestaurantDirect(1)">{{databaseLocal.restaurants[1].name}}</h2>
+                    {{databaseLocal.restaurants[1].details![0]}}
                 </div>
             </div>
         </div>
@@ -64,8 +73,10 @@
                 <!-- <h2><b>{{getDayDifference()}}</b></h2> -->
             </div>
             <div style="height: 36px; text-align: center; width: 80%; margin: auto;">
-                <button [disabled]="selectedRestaurantType==-1" [hidden]="!this.userService.loggedIn" color="primary" (click)="reserveTime()" mat-raised-button>Reserve Time</button>
-                <sign-in-popup [hidden]="this.userService.loggedIn" style="text-align: center;" [raised]="true" buttonName="Sign-In or Register to Reserve" color="primary"></sign-in-popup>
+                <button [disabled]="selectedRestaurantType==-1" [hidden]="!this.userService.loggedIn" color="primary"
+                    (click)="reserveTime()" mat-raised-button>Reserve Time</button>
+                <sign-in-popup [hidden]="this.userService.loggedIn" style="text-align: center;" [raised]="true"
+                    buttonName="Sign-In or Register to Reserve" color="primary"></sign-in-popup>
             </div>
         </div>
     </mat-grid-tile>
