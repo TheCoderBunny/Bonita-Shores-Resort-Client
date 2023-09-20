@@ -1,3 +1,4 @@
+<app-loading-popup #loading></app-loading-popup>
 <app-header></app-header>
 
 <div style="min-height: 100%;">
@@ -5,7 +6,6 @@
   <div class="image-ocean">
     <div class="cover">
       <div class="background">
-
       </div>
       <div class="background-end">
       </div>
@@ -23,28 +23,30 @@
     <form (ngSubmit)="signUp()">
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput placeholder="name@example.com" type="text" name="email" [(ngModel)]="newUser.email" [formControl]="emailFormControl" required>
-        <mat-error *ngIf="emailFormControl.invalid">{{getEmailErrorMessage()}}</mat-error>
+        <input matInput placeholder="name@example.com" type="text" name="email" (input)="getEmailErrorMessage()" [(ngModel)]="newUser.email">
+        <div class="error" *ngIf="emailInvalid!=='' && showErrors">{{emailInvalid}}</div>
       </mat-form-field>
       <br>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput type="password" name="password" [(ngModel)]="newUser.password" [formControl]="passwordFormControl" required>
-        <mat-error *ngIf="passwordFormControl.invalid">{{getPasswordErrorMessage()}}</mat-error>
+        <input matInput type="password" name="password" (input)="getPasswordErrorMessage()" [(ngModel)]="newUser.password">
+        <div class="error" *ngIf="passwordInvalid!=='' && showErrors">{{passwordInvalid}}</div>
       </mat-form-field>
       <br>
       <mat-form-field>
         <mat-label>First Name</mat-label>
-        <input matInput type="text" name="firstName" [(ngModel)]="newUser.firstName" required>
+        <input matInput type="text" name="firstName" (input)="getFirstNameErrorMessage()" [(ngModel)]="newUser.firstName">
+        <div class="error" *ngIf="firstNameInvalid!=='' && showErrors">{{firstNameInvalid}}</div>
       </mat-form-field>
       <br>
       <mat-form-field>
         <mat-label>Last Name</mat-label>
-        <input matInput type="text" name="lastName" [(ngModel)]="newUser.lastName" required>
+        <input matInput type="text" name="lastName" (input)="getLastNameErrorMessage()" [(ngModel)]="newUser.lastName">
+        <div class="error" *ngIf="lastNameInvalid!=='' && showErrors">{{lastNameInvalid}}</div>
       </mat-form-field>
       <br>
       <span class="menu-form">
-        <button mat-raised-button>Register</button>
+        <button mat-raised-button style="width: 212px;">Register</button>
       </span>
 
     </form>

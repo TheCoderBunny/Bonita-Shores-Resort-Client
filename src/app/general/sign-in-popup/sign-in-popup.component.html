@@ -14,10 +14,11 @@
                     <input matInput type="password" name="password" [(ngModel)]="password">
                 </mat-form-field>
 
+                <div class="error" *ngIf="failedLogin">Incorrect email or password</div>
+                <br>
                 <span>
                     <button class="topNavRight" mat-raised-button>Sign-In</button>
                 </span>
-
             </form>
             <span class="menu-form">
                 <button routerLink='/register' mat-raised-button>Register</button>

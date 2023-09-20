@@ -21,13 +21,14 @@ export class SignInPopupComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  failedLogin: boolean = false;
+
   signin() {
     this.userService.login(this.email, this.password).subscribe((response: any) => {
       //the person's name will automatically show.
     }, error => {
-      console.log('Error: ', error);
-      window.alert('Unsuccessful Login');
-      //  this.router.navigateByUrl('/signin');
+      //in the future also bring up an error message for when the connection is bad.
+      this.failedLogin = true;
     });
   }
 }

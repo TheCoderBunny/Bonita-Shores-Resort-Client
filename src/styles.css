@@ -213,4 +213,12 @@ hr.rounded {
     font-size: 3em;
 }
 
+.error{
+    /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgb(0,0,0,0)); */
+    color: rgb(204, 75, 75);
+    user-select: none;
+    text-align: center;
+    font-size: small;
+}
+
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
