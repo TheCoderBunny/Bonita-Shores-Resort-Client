@@ -6,6 +6,7 @@ import { DashboardMainComponent } from './dashboard/dashboard-main/dashboard-mai
 import { ParkComponent } from './resortPages/park/park.component';
 import { HotelsComponent } from './resortPages/hotels/hotels.component';
 import { RestaurantsComponent } from './resortPages/restaurants/restaurants.component';
+import { SlideComponent } from './resort/slide/slide.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: "home",
     component: HomeComponent
+  },
+  {
+    path: "homeslide",
+    component: SlideComponent
   },
   {
     path: "register",

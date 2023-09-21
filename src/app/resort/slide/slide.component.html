@@ -1,0 +1,9 @@
+<div class="slide-main" id="slide-main">
+    <div class="img-holder" style="height: 100%;">
+        <button id="rightButton" class="rightButton" mat-fab (click)="moveSlide(1)" color="primary"><mat-icon
+                class="icon-arrow">keyboard_arrow_right</mat-icon></button>
+        <button id="leftButton" class="leftButton" mat-fab (click)="moveSlide(-1)" color="primary"><mat-icon
+                class="icon-arrow">keyboard_arrow_left</mat-icon></button>
+    </div>
+</div>
+<app-home [hidden]="hideHomePage"></app-home>

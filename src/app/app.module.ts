@@ -31,6 +31,7 @@ import { HotelsComponent } from './resortPages/hotels/hotels.component';
 import { RestaurantsComponent } from './resortPages/restaurants/restaurants.component';
 import { LoadingPopupComponent } from './general/loading-popup/loading-popup.component';
 import { FooterComponent } from './general/footer/footer.component';
+import { SlideComponent } from './resort/slide/slide.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { FooterComponent } from './general/footer/footer.component';
     HotelsComponent,
     RestaurantsComponent,
     LoadingPopupComponent,
-    FooterComponent
+    FooterComponent,
+    SlideComponent
   ],
   imports: [
     BrowserModule,
