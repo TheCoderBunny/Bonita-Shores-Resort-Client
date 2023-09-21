@@ -1,7 +1,8 @@
 <div class="shine"></div>
 <mat-toolbar color="primary">
     <mat-toolbar color="primary" style="width: 80%; margin: auto;">
-        <button routerLink='/home' mat-button>Bonita Shores Resort</button>
+        <!-- <button routerLink='/home' mat-button>Bonita Shores Resort</button> -->
+        <button routerLink='/home' style="width: 340px;" mat-button><img src="/assets/LogoSmall.png" style="margin: auto; display: flex; justify-content: center;"></button>
         <div class="topNavRight">
             <div *ngFor="let button of buttonList">
                 <button routerLink='/{{button.toLowerCase()}}' mat-button>{{button}}</button>
