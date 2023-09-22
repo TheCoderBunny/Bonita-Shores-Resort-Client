@@ -1,6 +1,6 @@
 .right-button-slide {
-    right: 30px;
-    bottom: 30px;
+    right: 50px;
+    bottom: 50px;
 }
 
 .slide-main {
@@ -9,6 +9,8 @@
     height: 100%;
     background-color: rgb(255, 255, 255);
     position: absolute;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .slide-away {
@@ -32,7 +34,7 @@
 
 @keyframes slideButtonRight {
     from {
-        right: 30px;
+        right: 50px;
     }
 
     to {
@@ -62,6 +64,7 @@
     top: 0;
     overflow-x: hidden;
     overflow-y: hidden;
+    pointer-events: none;
 }
 
 .space {
@@ -71,7 +74,7 @@
     background-color: black;
 }
 
-.space img{
+.space img {
     position: absolute;
     opacity: 30%;
     transform-origin: center;
@@ -184,7 +187,7 @@
     }
 }
 
-.info-panel{
+.info-panel {
     position: absolute;
     top: 50px;
     left: 50px;
@@ -195,33 +198,70 @@
     color: white;
 }
 
-.info-panel .title{
-    position: absolute;
-    width: calc(100% - 200px);
-    left: 200px;
-    text-align: center;
+.info-panel-fly {
+    transition: transform ease-in 4s;
+    transform: translate(0, 200%);
 }
 
-.info-panel-right{
+.info-panel .title {
     position: absolute;
-    top: 50px;
+    width: calc(100% - 250px);
+    top: 100px;
+    left: 250px;
+    text-align: center;
+    font-size: 3em;
+}
+
+.info-panel-right {
+    position: absolute;
+    top: 250px;
     right: 50px;
-    /* background-color: rgba(255, 255, 255, 0.5); */
+    /* background-color: rgba(255, 255, 255, 0.2); */
     width: calc(100% - 750px);
     height: 200px;
     border-radius: 10px;
     color: white;
+    transform: rotateX(90deg) translate(0, -200%);
+    opacity: 0%;
 }
 
-.info-panel-right .title{
-    text-align: center;
+.info-panel-right-unfold {
+    transition: transform ease-out 5s;
+    transform: rotateX(0deg) translate(0, 0);
+    animation: 3s unfade 1s forwards;
 }
+
+.info-panel-right-quick-appear {
+    transform: rotateX(0deg) translate(0, 0);
+    animation: 1s unfade forwards;
+}
+
+.info-panel-right-quick-disappear {
+    transform: rotateX(0deg) translate(0, 0);
+    animation: 4s fade forwards;
+}
+
+.info-panel-right-fly {
+    transition: transform ease-in 5s;
+    transform: translate(0, 100vh);
+    /* animation: 3s unfade 1s forwards; */
+}
+
+.info-panel-right .title {
+    text-align: center;
+    font-size: 4em;
+}
+
+.info-panel-right .text {
+    text-align: center;
+    font-size: 3em;
+}
+
 
 .picture {
     position: absolute;
     width: 200px;
     height: 200px;
-    left: 50px;
     border-radius: 100%;
     background-color: white;
 }
@@ -235,36 +275,165 @@
     background-color: white;
 }
 
-.picture img {
-    width: 180px;
+.picture .img-small {
+    width: calc(100% - 20px);
     object-fit: cover;
     aspect-ratio: 1 / 1;
     margin: auto;
     border-radius: 100%;
-    /* top: 50%;
-    left: 50%; */
     transform: translate(10px, 10px);
+}
+
+.picture .img-big {
+    width: calc(100% - 10px);
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    margin: auto;
+    border-radius: 100%;
+    transform: translate(5px, 5px);
 }
 
 
 .point {
     width: 60%;
     margin-left: 40%;
-    height: 120px;
+    height: 160px;
 }
 
-.point .circle{
+.point .circle {
     width: 60px;
     height: 60px;
     border-radius: 100%;
     background-color: white;
-    float:left;
+    float: left;
 }
 
-.point .text{
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: white;
+
+    position: absolute;
+    transform: translate(231px, 173px);
+    z-index: 105;
+    animation: .5s unfade alternate;
+    animation-iteration-count: infinite;
+}
+
+.point .text {
     /* text-align: center; */
     margin-left: 20px;
     width: 250px;
     height: 60px;
-    float:left;
+    float: left;
+}
+
+.point ul {
+    position: relative;
+    left: -20px;
+}
+
+.info-panel-right-img {
+    position: absolute;
+    top: 350px;
+    right: 50px;
+    /* background-color: rgba(255, 255, 255, 0.2); */
+    width: calc(100% - 750px);
+    height: 0px;
+    border-radius: 10px;
+    color: white;
+    /* transform: scaleY(0); */
+    opacity: 0%;
+}
+
+.info-panel-right-img-open {
+    animation: 3s open forwards, 1s unfade forwards;
+}
+
+.info-panel-right-img-close {
+    height: 600px;
+    top: 50px;
+    animation: 4s fade forwards;
+}
+
+.info-panel-right-img img {
+    position: absolute;
+    /* width: 1200px; */
+    width: 1170px;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+}
+
+.info-panel-top {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: calc(100% - 100px);
+    height: 300px;
+    border-radius: 10px;
+    color: white;
+    opacity: 0%;
+}
+
+.info-panel-top-reveal {
+    animation: 4s unfade 1s forwards, 4s expand 4s forwards;
+}
+
+.large-title {
+    font-size: 3em;
+    transform: translate(0,8px);
+}
+
+.hide {
+    opacity: 0%;
+}
+
+.unhide {
+    animation: 1s unfade forwards;
+}
+
+@keyframes expand {
+    from {
+        height: 300px;
+    }
+
+    to {
+        height: 500px;
+    }
+}
+
+@keyframes open {
+    from {
+        height: 0px;
+        top: 350px
+    }
+
+    to {
+        height: 600px;
+        top: 50px;
+    }
+}
+
+@keyframes unfade {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 0%;
+    }
 }

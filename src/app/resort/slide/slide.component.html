@@ -14,55 +14,119 @@
         <!-- <button id="leftButton" class="leftButton" mat-fab (click)="moveSlide(-1)" color="primary"><mat-icon
                 class="icon-arrow">keyboard_arrow_left</mat-icon></button> -->
     </div>
-    <div class="info-panel">
+    <div class="info-panel" id="myself">
         <br>
         <h1 class="title"><b>Joshua Clark</b></h1>
         <div class="picture-behind">
 
         </div>
-        <div class="picture">
-            <img src="/assets/Slide/Myself.png">
+        <div class="picture" style="left: 50px;">
+            <img class="img-small" src="/assets/Slide/Myself.png">
         </div>
         <br><br><br><br><br><br><br><br><br><br>
         <div class="point">
-            <div class="circle"></div>
+            <div class="circle" (click)="openScripture()"></div>
             <div class="text">
-                <h1><b>Point</b></h1>
-                <div>Here's a bunch of details written out to take a bunch of space.</div>
+                <h1><b>Who I am</b></h1>
+                <ul>
+                    <li>Child of God</li>
+                    <li>Software Engineer</li>
+                    <li>Problem Solver</li>
+                </ul>
             </div>
         </div>
         <div class="point">
-            <div class="circle"></div>
+            <div class="circle" (click)="openHomeLocation()"></div>
             <div class="text">
-                <h1><b>Point lol</b></h1>
-                <div>Point details</div>
+                <h1><b>Where I'm From</b></h1>
+                <ul>
+                    <li>Central Florida</li>
+                    <li>Land of Theme Parks</li>
+                </ul>
             </div>
         </div>
         <div class="point">
-            <div class="circle"></div>
+            <div class="circle" (click)="openWhatIDo()"></div>
             <div class="text">
-                <h1><b>Point lol</b></h1>
-                <div>Point details</div>
+                <h1><b>What I do</b></h1>
+                <ul>
+                    <li>Game Design/Development</li>
+                    <li>Virtual Theme Parks</li>
+                    <li>3D Animation</li>
+                </ul>
             </div>
         </div>
         <div class="point">
-            <div class="circle"></div>
+            <div class="circle" (click)="openMyInterests()"></div>
             <div class="text">
-                <h1><b>Point lol</b></h1>
-                <div>Point details</div>
-            </div>
-        </div>
-        <div class="point">
-            <div class="circle"></div>
-            <div class="text">
-                <h1><b>Point lol</b></h1>
-                <div>Point details</div>
+                <h1><b>My Interests</b></h1>
+                <ul>
+                    <li>Puzzle Solving</li>
+                    <li>Lego</li>
+                    <li>Theme Parks</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <div class="info-panel-right">
-        <h1 class="title">Testing</h1>
+    <div [hidden]="hideBSRInfo" class="info-panel-top" id="bonita-shores-resort-info" style="text-align: center;">
+        <img src="/assets/Slide/Logo-Panel.png">
+        <h1 class="hide" id="bsr-section-top">Theme Park, Hotels & Dining</h1>
+        <mat-grid-list cols="5" rowHeight="200px" style="width: 50%; margin: auto;">
+            <mat-grid-tile>
+                <div id="bsr-section01" class="hide">
+                    <h1 class="large-title">Present</h1>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-icon id="bsr-section-arrow01" class="icon-arrow hide">keyboard_arrow_right</mat-icon>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <div id="bsr-section02" class="hide">
+                    <h1 class="large-title">Assist</h1>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-icon id="bsr-section-arrow02" class="icon-arrow hide">keyboard_arrow_right</mat-icon>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <div id="bsr-section03" class="hide">
+                    <h1 class="large-title">Inform</h1>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+    <div class="background">
+        <div class="info-panel-right" id="scripture">
+            <br>
+            <h1 class="title">Luke 3:5-6</h1>
+            <br><br>
+            <div class="text">
+                Every valley shall be filled<br><br><br>
+                And every mountain and hill brought low;<br><br><br>
+                The crooked places shall be made straight<br><br><br>
+                And the rough ways smooth;<br><br><br>
+                And all flesh shall see the salvation of God.
+            </div>
+        </div>
+
+        <div class="info-panel-right" id="mini-map">
+            <div style="width: 400px; height: 400px; margin: auto;">
+                <div class="picture" style="width: 400px; height: 400px;">
+                    <div class="dot"></div>
+                    <img class="img-small" src="/assets/Slide/Mini-Map.png">
+                </div>
+            </div>
+        </div>
+
+        <div class="info-panel-right-img" id="what-i-do">
+            <img src="/assets/Slide/Roblox01.png">
+        </div>
+
+        <div class="info-panel-right-img" id="interests">
+            <img src="/assets/Slide/Interests.png">
+        </div>
     </div>
 </div>
 <app-home [hidden]="hideHomePage"></app-home>
