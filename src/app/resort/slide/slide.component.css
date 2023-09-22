@@ -1,8 +1,13 @@
-.slide-main{
+.right-button-slide {
+    right: 30px;
+    bottom: 30px;
+}
+
+.slide-main {
     z-index: 100;
     width: 100%;
     height: 100%;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     position: absolute;
 }
 
@@ -21,13 +26,13 @@
     }
 }
 
-.slide-button-right{
+.slide-button-right {
     animation: 1s slideButtonRight forwards;
 }
 
 @keyframes slideButtonRight {
     from {
-        right: 0px;
+        right: 30px;
     }
 
     to {
@@ -35,7 +40,7 @@
     }
 }
 
-.slide-button-left{
+/* .slide-button-left{
     animation: 1s slideButtonLeft forwards;
 }
 
@@ -46,5 +51,135 @@
 
     to {
         left: -200px;
+    }
+} */
+
+.background {
+    background-color: rgba(255, 255, 255, 0);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.space {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.space img{
+    position: absolute;
+    opacity: 30%;
+    transform-origin: center;
+    transform: translate(50vw, 50vh) translate(-50%, -50%);
+}
+
+.planet {
+    position: absolute;
+    /* width: 200px;
+    height: auto;
+    aspect-ratio: 1 / 1; */
+
+    /* top: 100%;
+    left: 100%; */
+    transform-origin: center;
+    transform: translate(80vw, 70vh) translate(-50%, -50%);
+}
+
+.planet img {
+    transform-origin: center;
+    position: absolute;
+    width: 200px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+
+    transition: transform 8s;
+}
+
+.planet-move01 {
+    transition: transform 20s;
+    transform: scale(1, 1) translate(70vw, 65vh) translate(-50%, -50%) rotate(9deg)
+}
+
+.planet-move01 img {
+    transition: transform 20s;
+    transform: scale(2, 2)
+}
+
+.space-move01 img {
+    transition: transform 20s;
+    transform: translate(50vw, 50vh) translate(-52%, -51%);
+}
+
+.planet-move02 {
+    /* transition: width 40s, top 40s, left 40s;
+    width: 800px;
+    top: 60%;
+    left: 60%; */
+    transition: transform 20s;
+    transform: scale(1, 1) translate(60vw, 60vh) translate(-50%, -50%) rotate(18deg)
+}
+
+.planet-move02 img {
+    transition: transform 20s;
+    transform: scale(3, 3)
+}
+
+.space-move02 img {
+    transition: transform 20s;
+    transform: translate(50vw, 50vh) translate(-54%, -52%);
+}
+
+.planet-move03 {
+    transition: transform 4s;
+    transform: scale(1, 1) translate(50vw, 50vh) translate(-50%, -50%) rotate(30deg)
+}
+
+.planet-move03 img {
+    transition: transform 4s;
+    transform: scale(40, 40) translate(-20%, -5%)
+}
+
+.space-move03 img {
+    transition: transform 4s;
+    transform: translate(50vw, 50vh) translate(-55%, -54%);
+}
+
+.atmosphere {
+    z-index: 101;
+    opacity: 0%;
+}
+
+.atmosphere-reveal {
+    animation: 1.4s atmosphereReveal forwards;
+    transition: transform ease-out 3s;
+    transform: scale(2, 2)
+}
+
+@keyframes atmosphereReveal {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+.atmosphere-hide {
+    animation: 1s atmosphereHide forwards;
+}
+
+@keyframes atmosphereHide {
+    from {
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 0%;
     }
 }

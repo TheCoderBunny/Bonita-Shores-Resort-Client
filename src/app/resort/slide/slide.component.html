@@ -1,9 +1,18 @@
 <div class="slide-main" id="slide-main">
+    <div class="background">
+        <div class="space" id="space" [hidden]="hidePlanet">
+            <img src="/assets/Slide/Space.avif">
+        </div>
+        <div class="planet" id="planet" [hidden]="hidePlanet">
+            <img src="/assets/Slide/Planet.png">
+        </div>
+        <img class="atmosphere" id="atmosphere" src="/assets/Slide/Atmosphere.avif">
+    </div>
     <div class="img-holder" style="height: 100%;">
-        <button id="rightButton" class="rightButton" mat-fab (click)="moveSlide(1)" color="primary"><mat-icon
-                class="icon-arrow">keyboard_arrow_right</mat-icon></button>
-        <button id="leftButton" class="leftButton" mat-fab (click)="moveSlide(-1)" color="primary"><mat-icon
-                class="icon-arrow">keyboard_arrow_left</mat-icon></button>
+        <button id="rightButton" class="rightButton right-button-slide" mat-fab (click)="moveSlide(1)"
+            color="primary"><mat-icon class="icon-arrow">keyboard_arrow_right</mat-icon></button>
+        <!-- <button id="leftButton" class="leftButton" mat-fab (click)="moveSlide(-1)" color="primary"><mat-icon
+                class="icon-arrow">keyboard_arrow_left</mat-icon></button> -->
     </div>
 </div>
 <app-home [hidden]="hideHomePage"></app-home>
