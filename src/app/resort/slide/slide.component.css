@@ -210,7 +210,7 @@
 }
 
 .info-panel-reveal {
-    transition: transform ease-in 4s;
+    transition: transform ease-out 4s;
     transform: translate(0, 0);
 }
 
