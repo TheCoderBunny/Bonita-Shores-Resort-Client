@@ -156,6 +156,7 @@ export class SlideComponent {
 
   ngOnInit(): void {
     this.prepareSlide01();
+    // this.openSegment01(); //This is for testing the final transition.
   }
 
   scriptureOpened: boolean = false;

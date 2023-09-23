@@ -144,13 +144,13 @@
 }
 
 .planet-move03 {
-    transition: transform 4s;
-    transform: scale(1, 1) translate(50vw, 50vh) translate(-50%, -50%) rotate(30deg)
+    transition: transform 2.5s ease-in;
+    transform: scale(1, .7) translate(50vw, 50vh) translate(-50%, -50%) rotate(30deg)
 }
 
 .planet-move03 img {
-    transition: transform 4s;
-    transform: scale(40, 40) translate(-20%, -5%)
+    transition: transform 2.5s ease-in;
+    transform: scale(50, 50) translate(-13%, -1%)
 }
 
 .space-move03 img {
@@ -160,13 +160,14 @@
 
 .atmosphere {
     z-index: 101;
+    transform: translate(50vw, 50vh) translate(-50%, -50%) scale(1, 2) rotateZ(-5deg);;
     opacity: 0%;
 }
 
 .atmosphere-reveal {
     animation: 1.4s atmosphereReveal forwards;
-    transition: transform ease-out 3s;
-    transform: scale(2, 2)
+    transition: transform ease-in 2s;
+    transform: scale(3, 3) rotateZ(5deg);
 }
 
 @keyframes atmosphereReveal {
