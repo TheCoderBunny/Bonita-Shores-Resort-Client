@@ -119,12 +119,8 @@
 }
 
 .planet-move02 {
-    /* transition: width 40s, top 40s, left 40s;
-    width: 800px;
-    top: 60%;
-    left: 60%; */
     transition: transform 20s;
-    transform: scale(1, 1) translate(60vw, 60vh) translate(-50%, -50%) rotate(18deg)
+    transform: scale(1, 1) translate(60vw, 50vh) translate(-50%, -50%) rotate(18deg)
 }
 
 .planet-move02 img {
@@ -135,6 +131,16 @@
 .space-move02 img {
     transition: transform 20s;
     transform: translate(50vw, 50vh) translate(-54%, -52%);
+}
+
+.planet-move03mid {
+    transition: transform 5s;
+    transform: scale(1, 1) translate(50vw, 40vh) translate(-50%, -50%) rotate(24deg)
+}
+
+.planet-move03mid img {
+    transition: transform 5s;
+    transform: scale(5, 5)
 }
 
 .planet-move03 {
@@ -196,6 +202,15 @@
     height: calc(100% - 100px);
     border-radius: 10px;
     color: white;
+}
+
+.info-panel-hide {
+    transform: translate(-200%, 0);
+}
+
+.info-panel-reveal {
+    transition: transform ease-in 4s;
+    transform: translate(0, 0);
 }
 
 .info-panel-fly {
@@ -381,6 +396,11 @@
 
 .info-panel-top-reveal {
     animation: 4s unfade 1s forwards, 4s expand 4s forwards;
+}
+
+.info-panel-top-hide {
+    animation: 4s fade forwards;
+    height: 500px;
 }
 
 .large-title {

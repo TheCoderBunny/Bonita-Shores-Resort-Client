@@ -69,6 +69,13 @@ export class SlideComponent {
   }
 
   prepareSlide03() {
+
+    let bonitaShoresResortInfo = <HTMLElement>document.getElementById("bonita-shores-resort-info");
+    bonitaShoresResortInfo.classList.add("info-panel-top-hide");
+
+    let techInfo = <HTMLElement>document.getElementById("tech-info");
+    techInfo.classList.add("info-panel-reveal");
+
     //talk about the tech behind it.
     let planet = <HTMLElement>document.getElementById("planet");
     planet.classList.add("planet-move02");
@@ -79,16 +86,29 @@ export class SlideComponent {
 
   openSegment01(): void {
     let planet = <HTMLElement>document.getElementById("planet");
-    planet.classList.add("planet-move03");
+    planet.classList.add("planet-move03mid");
     let space = <HTMLElement>document.getElementById("space");
     space.classList.add("space-move03");
+
+    let techInfo = <HTMLElement>document.getElementById("tech-info");
+    techInfo.classList.add("info-panel-fly");
 
     let slideRightButton = <HTMLElement>document.getElementById("rightButton");
     slideRightButton.classList.add("slide-button-right")
 
     setTimeout(() => {
+      this.openSegment02Mid();
+    }, 4000);
+  }
+
+  openSegment02Mid(): void {
+
+    let planet = <HTMLElement>document.getElementById("planet");
+    planet.classList.add("planet-move03");
+
+    setTimeout(() => {
       this.openSegment02();
-    }, 1000);
+    }, 1500);
   }
 
   openSegment02(): void {
