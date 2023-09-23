@@ -22,6 +22,15 @@ export class RestaurantsComponent {
 
   constructor(public userService: UserService, private router: Router, public databaseLocal: DatabaseLocal) { }
 
+  preloaded: HTMLImageElement[] = [];
+  preloadRestaurantImages() {
+    for (let i = 0; i < this.databaseLocal.restaurants.length; i++) {
+      let img: HTMLImageElement = new Image()
+      img.src = this.databaseLocal.restaurants[i].extra;
+      this.preloaded.push(img);
+    }
+  }
+
   @ViewChild('timeSelector') timeSelector!: MatSelect;
 
   changeRestaurant(amount: number) {
@@ -72,6 +81,8 @@ export class RestaurantsComponent {
   startDate: Date = new Date();
 
   ngOnInit(): void {
+    this.preloadRestaurantImages();
+
     this.endDateMax = new Date(this.today.getFullYear() + 1, this.today.getMonth(), this.today.getDate() - 1);
     this.startDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
     this.changeRestaurant(0);

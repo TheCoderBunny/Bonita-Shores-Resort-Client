@@ -20,6 +20,16 @@ export class ParkComponent implements OnInit {
     "https://images.unsplash.com/photo-1586836476603-ce713984045e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     "https://images.unsplash.com/photo-1547737412-04c9cf2b0f56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1933&q=80"];
 
+
+  preloaded: HTMLImageElement[] = [];
+  preloadImages(urls: string[]) {
+    for (let i = 0; i < urls.length; i++) {
+      let img: HTMLImageElement = new Image()
+      img.src = urls[i];
+      this.preloaded.push(img);
+    }
+  }
+
   currentImage: string = this.imageList[0];
   currentImageInt: number = 0;
 
@@ -54,6 +64,8 @@ export class ParkComponent implements OnInit {
   childTicketCount: number = 0;
 
   ngOnInit(): void {
+    this.preloadImages(this.imageList);
+
     this.endDateMax = new Date(this.today.getFullYear() + 1, this.today.getMonth(), this.today.getDate() - 1);
     this.startDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
     this.endDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 2);
@@ -64,8 +76,8 @@ export class ParkComponent implements OnInit {
       this.adultTicketCount = Number(localStorage.getItem(this.tokenTicketsKey + "AdultTicketCount")) || 1;
       this.childTicketCount = Number(localStorage.getItem(this.tokenTicketsKey + "ChildTicketCount")) || 0;
 
-      if(this.startDate<this.today){
-        this.startDate=new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+      if (this.startDate < this.today) {
+        this.startDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
         this.endDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 2);
       }
     }

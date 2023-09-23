@@ -31,12 +31,12 @@ body {
     height: 500px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    object-position: 0% 50%;
+    object-position: 0% 30%;
     background-color: rgb(170, 170, 170);
 }
 
 .adImageAnimate {
-    animation: 3s alternate slideAdImage;
+    animation: 3s forwards slideAdImage;
 }
 
 @keyframes slideAdImage {

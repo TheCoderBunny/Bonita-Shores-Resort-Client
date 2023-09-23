@@ -31,6 +31,15 @@ export class HotelsComponent {
 
   constructor(public userService: UserService, private router: Router, public databaseLocal: DatabaseLocal) { }
 
+  preloaded: HTMLImageElement[] = [];
+  preloadHotelImages() {
+    for (let i = 0; i < this.databaseLocal.hotels.length; i++) {
+      let img: HTMLImageElement = new Image()
+      img.src = this.databaseLocal.hotels[i].extra;
+      this.preloaded.push(img);
+    }
+  }
+
   changeHotel(amount: number) {
     this.currentHotelInt += amount;
     if (this.currentHotelInt < 0) {
@@ -148,6 +157,8 @@ export class HotelsComponent {
   }
 
   ngOnInit(): void {
+    this.preloadHotelImages();
+
     this.endDateMax = new Date(this.today.getFullYear() + 1, this.today.getMonth(), this.today.getDate() - 1);
     this.startDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
     this.endDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1);
